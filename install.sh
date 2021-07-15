@@ -61,6 +61,6 @@ if mv -n ~/.zshrc ~/.zshrc-backup-$(date +"%Y-%m-%d"); then # backup .zshrc
     echo -e "Backed up the current .zshrc to .zshrc-backup-date\n"
 fi
 
-mv .zshrc ~/
+echo "source $(pwd)/.zshrc" > ~/.zshrc
 
 exit
