@@ -24,7 +24,7 @@ function hasParameter() {
 }
 
 function buildDirExists() {
-    if [ -d "build" ]; then
+    if [[ -d "build" || -d ".dart_tool" ]]; then
         echo -e "\U1F9F9 ${GREEN}Running: flc${END}"
         flc
     fi
