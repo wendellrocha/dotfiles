@@ -61,6 +61,10 @@ if mv -n ~/.zshrc ~/.zshrc-backup-$(date +"%Y-%m-%d"); then # backup .zshrc
     echo -e "Backed up the current .zshrc to .zshrc-backup-date\n"
 fi
 
+# Install brew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
 echo "source $(pwd)/.zshrc" > ~/.zshrc
+echo "source $(pwd)/.zprofile" > ~/.zprofile
 
 exit

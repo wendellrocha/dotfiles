@@ -11,7 +11,7 @@ ZSH_THEME="spaceship"
 plugins=(git bgnotify flutter meteor vscode)
 
 source $ZSH/oh-my-zsh.sh
-
+source "$HOME/dotfiles/utils.sh"
 
 SPACESHIP_PROMPT_ORDER=(
   user          # Username section
@@ -30,7 +30,8 @@ SPACESHIP_USER_SHOW=always
 SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_CHAR_SUFFIX=" "
 
-source "$HOME/dotfiles/utils.sh"
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
