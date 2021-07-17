@@ -65,6 +65,10 @@ fi
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 echo "source $(pwd)/.zshrc" > ~/.zshrc
-echo "source $(pwd)/.zprofile" > ~/.zprofile
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+brew update
+brew install arduino-cli
 
 exit
