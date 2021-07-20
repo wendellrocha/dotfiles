@@ -37,7 +37,7 @@ cd ~/Android/sdk/tools/bin && yes | ./sdkmanager --licenses
 cd ~/Android/sdk/tools/bin && ./sdkmanager  "patcher;v4" "platform-tools" \
     "platforms;android-30" \
     "build-tools;30.0.2" \
-    "sources;android-30" \
+    "sources;android-30"
 
 cd ~
 curl https://install.meteor.com/ | sh
