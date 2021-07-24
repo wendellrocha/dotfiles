@@ -2,6 +2,7 @@
 
 RED="\e[31m"
 GREEN="\e[32m"
+YELLOW="\e[33m" 
 END="\e[0m"
 
 function isFlutterProject() {
@@ -25,8 +26,10 @@ function hasParameter() {
 
 function buildDirExists() {
     if [[ -d "build" || -d ".dart_tool" ]]; then
-        echo -e "\U1F9F9 ${GREEN}Running: flc${END}"
+        echo -e "\U1F9F9 ${GREEN}Running flc in ${PWD##*/}${END}"
         flc
+    else
+         echo "${YELLOW}Nothing to do, skipping$2${END}"
     fi
 }
 
@@ -87,4 +90,8 @@ function flru() {
             flr --dart-define=isQA=$1
         fi
     fi
+}
+
+function flca() {
+    for d in ./*/ ; do (cd "$d" && buildDirExists); done
 }
