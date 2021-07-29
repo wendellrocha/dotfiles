@@ -16,6 +16,18 @@ sudo apt install -y curl git unzip xz-utils zip libglu1-mesa zsh \
 
 sudo update-alternatives --config java
 
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+
+# Create a symbolic link to add kitty to PATH (assuming ~/.local/bin is in
+# your PATH)
+sudo ln -s ~/.local/kitty.app/bin/kitty /usr/local/bin/
+# Place the kitty.desktop file somewhere it can be found by the OS
+cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
+# Update the path to the kitty icon in the kitty.desktop file
+sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty.desktop
+
+
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
 echo -e "Installing oh-my-zsh\n"
 if [ -d ~/.oh-my-zsh ]; then
@@ -65,6 +77,8 @@ fi
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 echo "source $(pwd)/.zshrc" > ~/.zshrc
+
+ln -sf $(pwd)/kitty.conf /home/$USER/.config/kitty/kitty.conf 
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
