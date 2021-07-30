@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install -y gnupg apt-transport-https wget ca-certificates dirmngr software-properties-common
+sudo apt install -y gnupg apt-transport-https wget ca-certificates dirmngr software-properties-common lsb-release
 
 wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
 sudo add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
@@ -8,13 +8,21 @@ curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 
 sudo sh -c 'wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
 sudo sh -c 'wget -qO- https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 sudo apt update
 
 sudo apt install -y curl git unzip xz-utils zip libglu1-mesa zsh \
-    nodejs build-essential adoptopenjdk-8-hotspot dart
+    nodejs build-essential adoptopenjdk-8-hotspot dart \
+    qemu qemu-kvm libvirt-daemon libvirt-clients bridge-utils virt-manager \
+    docker-ce docker-ce-cli containerd.io
 
 sudo update-alternatives --config java
+sudo systemctl enable --now libvirtd
 
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
@@ -57,6 +65,8 @@ curl https://install.meteor.com/ | sh
 pub global activate fvm
 
 fvm global stable
+
+sudo usermod -aG docker $USER
 
 /bin/zsh -i -c git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
 /bin/zsh -i -c ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
