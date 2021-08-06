@@ -31,8 +31,8 @@ SPACESHIP_USER_SHOW=always
 SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_CHAR_SUFFIX=" "
 
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+alias ls="exa -abghHlS --git"
+alias cat="batcat --color=always --style=numbers"
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
