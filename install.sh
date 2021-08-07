@@ -24,16 +24,6 @@ sudo apt install -y git unzip xz-utils zip libglu1-mesa zsh \
 sudo update-alternatives --config java
 sudo systemctl enable --now libvirtd
 
-curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-
-# Create a symbolic link to add kitty to PATH (assuming ~/.local/bin is in
-# your PATH)
-sudo ln -sf ~/.local/kitty.app/bin/kitty /usr/local/bin/
-# Place the kitty.desktop file somewhere it can be found by the OS
-cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
-# Update the path to the kitty icon in the kitty.desktop file
-sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty.desktop
-
 echo -e "Installing oh-my-zsh\n"
 if [ -d ~/.oh-my-zsh ]; then
     echo -e "oh-my-zsh is already installed\n"
@@ -89,9 +79,11 @@ fi
 git clone https://github.com/gmarik/Vundle.vim ~/.vim/bundle/Vundle.vim
 
 echo "source $(pwd)/.zshrc" > ~/.zshrc
+mkdir /home/$USER/.config/alacritty
 
-ln -sf $(pwd)/kitty.conf /home/$USER/.config/kitty/kitty.conf 
-ln -sf $(pwd)/.vimrc /home/$USER/.vimrc 
-ln -sf $(pwd)/.gitconfig /home/$USER/.gitconfig 
-
+ln -sf $(pwd)/kitty.conf /home/$USER/.config/kitty/kitty.conf
+ln -sf $(pwd)/alacritty.yml /home/.config/alacritty/alacritty.yml
+ln -sf $(pwd)/.vimrc /home/$USER/.vimrc
+ln -sf $(pwd)/.gitconfig /home/$USER/.gitconfig
+ln -sf $(pwd)/.tmux.conf /home/$USER/.tmux.conf
 exit

@@ -31,6 +31,8 @@ SPACESHIP_USER_SHOW=always
 SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_CHAR_SUFFIX=" "
 
+export TERM="screen-256color"
+
 alias ls="exa -abghHlS --git"
 alias cat="batcat --color=always --style=numbers"
 

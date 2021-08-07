@@ -9,7 +9,6 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'scrooloose/syntastic'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
 Plugin 'majutsushi/tagbar'
@@ -42,6 +41,9 @@ colorscheme dracula
 filetype plugin indent on
 
 " --- General settings ---
+"let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"let &t_8b = "\<Esc>[48:2;%lu;%lu;%lum"
+
 set backspace=indent,eol,start
 set ruler
 set number
@@ -65,12 +67,12 @@ nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 let g:nerdtree_tabs_open_on_console_startup = 0
 
 " ----- scrooloose/syntastic settings -----
-let g:syntastic_error_symbol = '✘'
-let g:syntastic_warning_symbol = "▲"
-augroup mySyntastic
-  au!
-  au FileType tex let b:syntastic_mode = "passive"
-augroup END
+"let g:syntastic_error_symbol = '✘'
+"let g:syntastic_warning_symbol = "▲"
+"augroup mySyntastic
+"  au!
+"  au FileType tex let b:syntastic_mode = "passive"
+"augroup END
 
 " ----- xolox/vim-easytags settings -----
 " Where to look for tags files
