@@ -16,7 +16,6 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Raimondi/delimitMate'
 Plugin 'dart-lang/dart-vim-plugin'
-Plugin 'thosakwe/vim-flutter'
 Plugin 'natebosch/vim-lsc'
 Plugin 'natebosch/vim-lsc-dart'
 Plugin 'ntpeters/vim-better-whitespace'
@@ -33,10 +32,11 @@ Plugin 'luochen1990/rainbow'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'dracula/vim', { 'name': 'dracula' }
 Plugin 'vimsence/vimsence'
+Plugin 'neoclide/coc.nvim'
 
 call vundle#end()
 
-colorscheme dracula
+"colorscheme dracula
 
 filetype plugin indent on
 
@@ -51,7 +51,7 @@ set showcmd
 set incsearch
 set hlsearch
 
-syntax on
+syntax enable
 
 set mouse=a
 set background=dark

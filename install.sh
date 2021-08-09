@@ -17,7 +17,7 @@ echo \
 sudo apt update
 
 sudo apt install -y git unzip xz-utils zip libglu1-mesa zsh tmux \
-    nodejs build-essential adoptopenjdk-8-hotspot dart exa bat \
+    nodejs build-essential adoptopenjdk-8-hotspot dart exa bat neovim \
     qemu qemu-kvm libvirt-daemon libvirt-clients bridge-utils virt-manager \
     docker-ce docker-ce-cli containerd.io
 
@@ -80,9 +80,11 @@ git clone https://github.com/gmarik/Vundle.vim ~/.vim/bundle/Vundle.vim
 
 echo "source $(pwd)/.zshrc" > ~/.zshrc
 mkdir /home/$USER/.config/alacritty
+mkdir /home/$USER/.config/nvim
 
 ln -sf $(pwd)/alacritty.yml /home/.config/alacritty/alacritty.yml
 ln -sf $(pwd)/.vimrc /home/$USER/.vimrc
+ln -sf $(pwd)/.vimrc / home/$USER/.config/nvim/init.vim
 ln -sf $(pwd)/.gitconfig /home/$USER/.gitconfig
 ln -sf $(pwd)/.tmux.conf /home/$USER/.tmux.conf
 exit
