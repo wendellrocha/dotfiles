@@ -33,6 +33,8 @@ Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'dracula/vim', { 'name': 'dracula' }
 Plugin 'vimsence/vimsence'
 Plugin 'neoclide/coc.nvim'
+Plugin 'gko/vim-coloresque'
+Plugin 'ryanoasis/vim-devicons'
 
 call vundle#end()
 
@@ -146,3 +148,17 @@ let g:strip_whitespace_on_save=1
 
 " ---- rainbow you belong with me ----
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
+
+" ---- keymaps -----
+"  ctrl+s save file
+nnoremap <C-s> :w!<CR>
+" ctrl+q quit vim/nvim
+nnoremap <C-q> :qa<CR>
+" navigate between buffers with f1/f2
+nnoremap <F1> :bprevious<CR>
+nnoremap <F2> :bnext<CR>
+" move live up or down with shift+up/down key
+nnoremap <silent> <s-Down> :m +1<CR>
+nnoremap <silent> <s-Up> :m -2<CR>
+" copy text to clipboard
+vnoremap <C-c> "+y<CR>
