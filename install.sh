@@ -85,7 +85,7 @@ mkdir /home/$USER/.config/nvim
 ln -sf $(pwd)/alacritty.yml /home/.config/alacritty/alacritty.yml
 ln -sf $(pwd)/.vimrc /home/$USER/.vimrc
 ln -sf $(pwd)/.vimrc /home/$USER/.config/nvim/init.vim
-ln -sf $(pwd)/coc-settings.json /home/$USER/.config/coc-settings.json
+ln -sf $(pwd)/coc-settings.json /home/$USER/.config/nvim/coc-settings.json
 ln -sf $(pwd)/.gitconfig /home/$USER/.gitconfig
 ln -sf $(pwd)/.tmux.conf /home/$USER/.tmux.conf
 exit

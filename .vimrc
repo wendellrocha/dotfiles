@@ -30,15 +30,13 @@ Plugin 'elzr/vim-json'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'luochen1990/rainbow'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plugin 'dracula/vim', { 'name': 'dracula' }
 Plugin 'vimsence/vimsence'
 Plugin 'neoclide/coc.nvim'
 Plugin 'gko/vim-coloresque'
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'scrooloose/syntastic'
 
 call vundle#end()
-
-"colorscheme dracula
 
 filetype plugin indent on
 
@@ -53,6 +51,7 @@ set showcmd
 set incsearch
 set hlsearch
 
+highlight ColorColumn ctermbg=238
 syntax enable
 
 set mouse=a
@@ -69,12 +68,12 @@ nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 let g:nerdtree_tabs_open_on_console_startup = 0
 
 " ----- scrooloose/syntastic settings -----
-"let g:syntastic_error_symbol = '✘'
-"let g:syntastic_warning_symbol = "▲"
-"augroup mySyntastic
-"  au!
-"  au FileType tex let b:syntastic_mode = "passive"
-"augroup END
+let g:syntastic_error_symbol = '✘'
+let g:syntastic_warning_symbol = "▲"
+augroup mySyntastic
+  au!
+  au FileType tex let b:syntastic_mode = "passive"
+augroup END
 
 " ----- xolox/vim-easytags settings -----
 " Where to look for tags files

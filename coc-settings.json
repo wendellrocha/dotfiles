@@ -3,4 +3,15 @@
     "dart",
     "html"
   ],
+  "dart.analysisExcludedFolders": [
+    ".fvm",
+    "build",
+    "tests",
+    "assets",
+    ".idea",
+    ".dart_tool",
+    ".slidy",
+    "android",
+    "ios"
+  ]
 }
