@@ -154,6 +154,8 @@ let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowTo
 nnoremap <C-s> :w!<CR>
 " ctrl+q quit vim/nvim
 nnoremap <C-q> :qa<CR>
+" run :DartFmt
+nnoremap <A-F> :DartFmt<CR>
 " navigate between buffers with f1/f2
 nnoremap <F1> :bprevious<CR>
 nnoremap <F2> :bnext<CR>
