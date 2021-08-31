@@ -7,6 +7,7 @@ export PATH="$PATH:/home/$USER/.pub-cache/bin"
 export PATH="$PATH:/home/$USER/tools/dart-sdk/bin"
 export PATH="$PATH:/opt/mitmproxy"
 
+export POSTMAN_DISABLE_GPU=true
 ZSH_THEME="spaceship"
 
 plugins=(git bgnotify flutter meteor vscode)

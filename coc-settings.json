@@ -13,5 +13,6 @@
     ".slidy",
     "android",
     "ios"
-  ]
+  ],
+  "flutter.autoOpenDevLog": true
 }
