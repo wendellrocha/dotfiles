@@ -37,6 +37,17 @@ export TERM="screen-256color"
 alias ls="exa -abghHlS --git"
 alias cat="batcat --color=always --style=numbers"
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND=find
+export FZF_DEFAULT_OPTS="
+  --color hl:011,fg+:015,bg+:-1,hl+:011
+  --color info:008,prompt:003,spinner:011,pointer:006,marker:002
+  --cycle
+  --prompt='❯ '
+  --pointer='▶'
+  --marker='│'
+"
+
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"

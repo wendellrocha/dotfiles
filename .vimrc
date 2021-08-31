@@ -3,7 +3,8 @@ set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+set rtp+=~/.fzf
+cal vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'bling/vim-airline'
@@ -35,6 +36,8 @@ Plugin 'neoclide/coc.nvim'
 Plugin 'gko/vim-coloresque'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'scrooloose/syntastic'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 
 call vundle#end()
 
@@ -147,6 +150,43 @@ let g:strip_whitespace_on_save=1
 
 " ---- rainbow you belong with me ----
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
+
+"-------------------------------------------------------------------- FZF {{{1
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+      \ { 'fg':    ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Ignore'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
+
+let g:fzf_preview_window = []
+
+" Bcommits
+" Blines
+" Btags
+" Files
+let $FZF_DEFAULT_COMMAND=''
+nnoremap <leader>p :Files<CR>
+nnoremap <leader>fc    :<C-u>Colors<cr>
+nnoremap <leader>fcmd  :<C-u>Commands<cr>
+nnoremap <leader>fgc   :<C-u>Commits<cr>
+nnoremap <leader>fft   :<C-u>Filetypes<cr>
+nnoremap <leader>fht   :<C-u>Helptags<cr>
+nnoremap <leader>fh    :<C-u>History-command<cr>
+nnoremap <leader>fhf   :<C-u>History-files<cr>
+nnoremap <leader>fhs   :<C-u>History-search<cr>
+nnoremap <leader>fmap  :<C-u>Maps<cr>
+nnoremap <leader>fmark :<C-u>Marks<cr>
+nnoremap <leader>fw    :<C-u>Windows<cr>
 
 " ---- keymaps -----
 "  ctrl+s save file

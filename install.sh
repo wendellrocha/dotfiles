@@ -31,6 +31,9 @@ else
     git clone --depth=1 git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 fi
 
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+
 mkdir -p /home/$USER/Android/sdk
 mkdir -p /home/$USER/.android && touch /home/$USER/.android/repositories.cfg
 
