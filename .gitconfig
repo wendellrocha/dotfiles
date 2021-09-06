@@ -3,3 +3,6 @@
 	name = Wendell Rocha
 [pull]
 	rebase = false
+
+[init]
+	defaultBranch = main
