@@ -64,7 +64,7 @@ cat "Y" | fvm global stable
 
 sudo usermod -aG docker $USER
 
-/bin/zsh -i -c 'git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"'
+/bin/zsh -i -c 'cd ~ && git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"'
 /bin/zsh -i -c 'ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"'
 
 echo -e "\nSudo access is needed to change default shell\n"
@@ -87,7 +87,7 @@ mkdir /home/$USER/.config/nvim
 
 ln -sf $(pwd)/alacritty.yml /home/.config/alacritty/alacritty.yml
 ln -sf $(pwd)/.vimrc /home/$USER/.vimrc
-ln -sf $(pwd)/.vimrc /home/$USER/.config/nvim/init.vim
+ln -sf $(pwd)/init.vim /home/$USER/.config/nvim/init.vim
 ln -sf $(pwd)/coc-settings.json /home/$USER/.config/nvim/coc-settings.json
 ln -sf $(pwd)/.gitconfig /home/$USER/.gitconfig
 ln -sf $(pwd)/.tmux.conf /home/$USER/.tmux.conf

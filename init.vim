@@ -21,7 +21,6 @@ Plug 'natebosch/vim-lsc-dart'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
-Plug 'HTML-AutoCloseTag'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'valloric/youcompleteme'
 Plug 'pangloss/vim-javascript'
@@ -36,12 +35,15 @@ Plug 'gko/vim-coloresque'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/syntastic'
 Plug 'junegunn/fzf'
-Plug 'junegunn/fzf', { 'do': g:fzf_install }
-Plug 'folke/lsp-colors.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'folke/trouble.nvim'
+Plug 'junegunn/fzf.vim'
+"Plug 'folke/lsp-colors.nvim'
+"Plug 'kyazdani42/nvim-web-devicons'
+"Plug 'folke/trouble.nvim'
 
 call plug#end()
+lua <<EOF
+print('hello from lua')
+EOF
 
 " --- General settings ---
 "let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
