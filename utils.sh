@@ -2,7 +2,7 @@
 
 RED="\e[31m"
 GREEN="\e[32m"
-YELLOW="\e[33m" 
+YELLOW="\e[33m"
 END="\e[0m"
 
 function isFlutterProject() {
@@ -13,6 +13,17 @@ function isFlutterProject() {
     else
         return 0
     fi
+}
+
+function emulator() {
+   if [ -z "$1" ]; then
+      echo "${YELLOW}Listing avds$2${END}"
+      /home/$USER/Android/sdk/emulator/emulator -list-avds
+      return 1
+   else
+      /home/$USER/Android/sdk/emulator/emulator -avd $1 > /dev/null 2>&1 &;disown
+      return 0
+   fi
 }
 
 function hasParameter() {
