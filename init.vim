@@ -3,9 +3,6 @@ set nocompatible
 set rtp+=~/.fzf
 call plug#begin('~/.vim/plugged')
 
-let g:fzf_install = 'yes | ./install'
-
-Plug 'gmarik/Vundle.vim'
 Plug 'bling/vim-airline'
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
@@ -21,7 +18,6 @@ Plug 'natebosch/vim-lsc-dart'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
-Plug 'ekalinin/Dockerfile.vim'
 Plug 'valloric/youcompleteme'
 Plug 'pangloss/vim-javascript'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -30,20 +26,42 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'luochen1990/rainbow'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'vimsence/vimsence'
-Plug 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'gko/vim-coloresque'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/syntastic'
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-"Plug 'folke/lsp-colors.nvim'
-"Plug 'kyazdani42/nvim-web-devicons'
-"Plug 'folke/trouble.nvim'
+Plug 'folke/lsp-colors.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'folke/trouble.nvim'
 
 call plug#end()
 lua <<EOF
-print('hello from lua')
+require("lsp-colors").setup({
+  Error = "#db4b4b",
+  Warning = "#e0af68",
+  Information = "#0db9d7",
+  Hint = "#10B981"
+})
+
+require'nvim-web-devicons'.setup {
+ -- globally enable default icons (default to false)
+ -- will get overriden by `get_icons` option
+ default = true;
+}
+
+require("trouble").setup {
+  -- your configuration comes here
+  -- or leave it empty to use the default settings
+  -- refer to the configuration section below
+}
 EOF
+
+" coc config
+let g:coc_global_extensions = [
+  \ 'coc-flutter',
+  \ ]
 
 " --- General settings ---
 "let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"

@@ -6,9 +6,9 @@ export PATH="$PATH:/home/$USER/Android/sdk/tools"
 export PATH="$PATH:/home/$USER/fvm/default/bin"
 export PATH="$PATH:/home/$USER/.pub-cache/bin"
 export PATH="$PATH:/home/$USER/tools/dart-sdk/bin"
-export PATH="$PATH:/opt/mitmproxy"
 export PATH="$PATH:/$JAVA_HOME/bin:$PATH"
 export PATH="$PATH:/opt/go/bin"
+export PATH="$PATH:/home/$USER/.local/bin"
 
 ZSH_THEME="spaceship"
 
