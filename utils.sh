@@ -22,7 +22,6 @@ function emulator() {
     read index
     avd=$(/home/$USER/Android/sdk/emulator/emulator -list-avds | sed "${index}q;d")
     [[ -n $avd ]] || { echo "${RED}Invalid choice. Please try again.${END}" >&2; return 1; }
-    echo "$avd"
     echo "${GREEN}Selected${END} ${CYAN}$avd${END}"
     /home/$USER/Android/sdk/emulator/emulator -avd $avd > /dev/null 2>&1 &;disown
 }
