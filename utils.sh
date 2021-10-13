@@ -3,6 +3,7 @@
 RED="\e[31m"
 GREEN="\e[32m"
 YELLOW="\e[33m"
+CYAN="\e[36m"
 END="\e[0m"
 
 function isFlutterProject() {
@@ -16,19 +17,19 @@ function isFlutterProject() {
 }
 
 function emulator() {
-   if [ -z "$1" ]; then
-      echo "${YELLOW}Listing avds$2${END}"
-      /home/$USER/Android/sdk/emulator/emulator -list-avds
-      return 1
-   else
-      /home/$USER/Android/sdk/emulator/emulator -avd $1 > /dev/null 2>&1 &;disown
-      return 0
-   fi
+    /home/$USER/Android/sdk/emulator/emulator -list-avds | cat -n
+    echo "${YELLOW}Please select an avd:${END}"
+    read index
+    avd=$(/home/$USER/Android/sdk/emulator/emulator -list-avds | sed "${index}q;d")
+    [[ -n $avd ]] || { echo "${RED}Invalid choice. Please try again.${END}" >&2; return 1; }
+    echo "$avd"
+    echo "${GREEN}Selected${END} ${CYAN}$avd${END}"
+    /home/$USER/Android/sdk/emulator/emulator -avd $avd > /dev/null 2>&1 &;disown
 }
 
-function hasParameter() {
-    if [ -z "$1" ]; then
-        echo "${RED}Error: No argument supplied. Usage: $2${END}"
+function hasParameters() {
+    if [[ -z "$1" || -z "$2" ]]; then
+        echo "${RED}Error: No argument supplied. Usage: $3${END}"
         return 1
     else
         return 0
@@ -47,11 +48,11 @@ function buildDirExists() {
 function flbu() {
     if isFlutterProject
     then
-        if hasParameter "$1" "flbu <true|false>"
+        if hasParameters "$1" "$2" "flbu <flavor> <true|false>"
         then
             buildDirExists
-            echo -e "\U1F680 ${GREEN}Build appbundle: flb appbundle --no-sound-null-safety --dart-define=isQA=$1${END}"
-            flb appbundle --no-sound-null-safety --dart-define=isQA=$1
+            echo -e "\U1F680 ${GREEN}Build appbundle: flb appbundle --no-sound-null-safety --flavor $1 --dart-define=isQA=$2${END}"
+            flb appbundle --no-sound-null-safety --flavor $1 --dart-define=isQA=$2
         fi
     fi
 }
@@ -59,11 +60,11 @@ function flbu() {
 function flbs() {
     if isFlutterProject
     then
-        if hasParameter "$1" "flbs <true|false>"
+        if hasParameters "$1" "$2" "flbu <flavor> <true|false>"
         then
             buildDirExists
-            echo -e "\U1F680 ${GREEN}Build appbundle: flb appbundle --dart-define=isQA=$1${END}"
-            flb appbundle --dart-define=isQA=$1
+            echo -e "\U1F680 ${GREEN}Build appbundle: flb appbundle --flavor $1 --dart-define=isQA=$2${END}"
+            flb appbundle --flavor $1 --dart-define=isQA=$2
         fi
     fi
 }
@@ -71,11 +72,11 @@ function flbs() {
 function flku() {
     if isFlutterProject
     then
-        if hasParameter "$1" "flku <true|false>"
+        if hasParameters "$1" "$2" "flbu <flavor> <true|false>"
         then
             buildDirExists
-            echo -e "\U1F4E6 ${GREEN}Build APK: flb apk --split-per-abi --no-sound-null-safety --dart-define=isQA=$1${END}"
-            flb apk --split-per-abi --no-sound-null-safety --dart-define=isQA=$1
+            echo -e "\U1F4E6 ${GREEN}Build APK: flb apk --split-per-abi --no-sound-null-safety --flavor $1 --dart-define=isQA=$2${END}"
+            flb apk --split-per-abi --no-sound-null-safety --flavor $1 --dart-define=isQA=$2
         fi
     fi
 }
@@ -83,11 +84,11 @@ function flku() {
 function flks() {
     if isFlutterProject
     then
-        if hasParameter "$1" "flks <true|false>"
+        if hasParameters "$1" "$2" "flbu <flavor> <true|false>"
         then
             buildDirExists
-            echo -e "\U1F4E6 ${GREEN}Build APK \U1F5C2: flb apk --split-per-abi --dart-define=isQA=$1${END}"
-            flb apk --split-per-abi --dart-define=isQA=$1
+            echo -e "\U1F4E6 ${GREEN}Build APK \U1F5C2: flb apk --split-per-abi --flavor $1 --dart-define=isQA=$2${END}"
+            flb apk --split-per-abi --flavor $1 --dart-define=isQA=$2
         fi
     fi
 }
@@ -95,10 +96,10 @@ function flks() {
 function flru() {
     if isFlutterProject
     then
-        if hasParameter "$1" "flru <true|false>"
+        if hasParameters "$1" "$2" "flbu <flavor> <true|false>"
         then
-            echo -e "\U1F525 ${GREEN}Running: flr --dart-define=isQA=$1${END}"
-            flr --dart-define=isQA=$1
+            echo -e "\U1F525 ${GREEN}Running: flr --flavor $1 --dart-define=isQA=$2${END}"
+            flr --flavor $1 --dart-define=isQA=$2
         fi
     fi
 }
