@@ -8,6 +8,7 @@ export PATH="$PATH:/home/$USER/tools/dart-sdk/bin"
 export PATH="$PATH:/$JAVA_HOME/bin:$PATH"
 export PATH="$PATH:/opt/go/bin"
 export PATH="$PATH:/home/$USER/.local/bin"
+export PATH="$PATH:/opt/mitm"
 
 ZSH_THEME="spaceship"
 
