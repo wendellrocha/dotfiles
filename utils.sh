@@ -106,3 +106,12 @@ function flru() {
 function flca() {
     for d in ./*/ ; do (cd "$d" && buildDirExists); done
 }
+
+function rcd() {
+    if [[ -z "$1" ]]; then
+        echo "${RED}Error: No argument supplied. Usage: rcd <command> ${END}"
+        return 1
+    else
+        for d in ./*/ ; do (cd "$d" && $1); done
+    fi
+}

@@ -1,45 +1,38 @@
 set nocompatible
 
-set rtp+=~/.fzf
+set encoding=UTF-8
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+
 call plug#begin('~/.vim/plugged')
 
-let g:fzf_install = 'yes | ./install'
-
-Plug 'gmarik/Vundle.vim'
-Plug 'bling/vim-airline'
-Plug 'scrooloose/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'preservim/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
 Plug 'majutsushi/tagbar'
+Plug 'sheerun/vim-polyglot'
+Plug 'xolox/vim-misc'
 Plug 'kien/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'Raimondi/delimitMate'
-Plug 'dart-lang/dart-vim-plugin'
-Plug 'natebosch/vim-lsc'
-Plug 'natebosch/vim-lsc-dart'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
-Plug 'HTML-AutoCloseTag'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'valloric/youcompleteme'
-Plug 'pangloss/vim-javascript'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'elzr/vim-json'
-Plug 'elixir-lang/vim-elixir'
 Plug 'luochen1990/rainbow'
+Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'vimsence/vimsence'
-Plug 'neoclide/coc.nvim'
 Plug 'gko/vim-coloresque'
-Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/syntastic'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf', { 'do': g:fzf_install }
-Plug 'folke/lsp-colors.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'folke/trouble.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
 
@@ -53,7 +46,7 @@ set number
 set showcmd
 set incsearch
 set hlsearch
-
+set textwidth=80 colorcolumn=+1
 highlight ColorColumn ctermbg=238
 syntax enable
 
@@ -63,6 +56,41 @@ set laststatus=2
 let g:airline_detect_paste=1
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
+
+
+" ----------- fatih/vim-go ------------
+filetype plugin indent on
+
+set autowrite
+" Go syntax highlighting
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_operators = 1
+
+" Auto formatting and importing
+let g:go_fmt_autosave = 1
+let g:go_fmt_command = "goimports"
+
+" Status line types/signatures
+let g:go_auto_type_info = 1
+
+" Run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+" Map keys for most used commands.
+" Ex: `\b` for building, `\r` for running and `\b` for running test.
+autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
 
 " ----- jistr/vim-nerdtree-tabs -----
 " Open/close NERDTree Tabs with \t

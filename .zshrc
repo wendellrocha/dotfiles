@@ -36,6 +36,7 @@ SPACESHIP_CHAR_SUFFIX=" "
 
 export TERM="screen-256color"
 
+eval "$(rbenv init -)"
 alias ls="exa -abghHlS --git"
 alias cat="batcat --color=always --style=numbers"
 
