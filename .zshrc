@@ -11,6 +11,7 @@ export PATH="$PATH:/opt/go/bin"
 export PATH="$PATH:$(go env GOPATH)/bin"
 export PATH="$PATH:/home/$USER/.local/bin"
 export PATH="$PATH:/opt/mitm"
+export PATH="/opt/Komodo-IDE/bin:$PATH"
 
 ZSH_THEME="spaceship"
 
