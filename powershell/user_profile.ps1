@@ -5,6 +5,8 @@ Import-Module Terminal-Icons
 Import-Module PSFzf
 Import-Module posh-git
 
+$env:POSH_GIT_ENABLED = $true
+
 function Get-ScriptDirectory { Split-Path $MyInvocation.ScriptName }
 $PROMPT_CONFIG = Join-Path (Get-ScriptDirectory) 'jandedobbeleer.omp.json'
 
