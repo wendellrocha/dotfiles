@@ -1,9 +1,21 @@
 # set PowerShell to UTF-8
 [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
 
-Import-Module Terminal-Icons
-Import-Module PSFzf
-Import-Module posh-git
+function getModules() {
+    if (-not(Get-Module -name Terminal-Icons)) {
+        Import-Module -name Terminal-Icons
+    }
+
+    if (-not(Get-Module -name PSFzf)) {
+        Import-Module -name PSFzf
+    }
+
+    if (-not(Get-Module -name  posh-git)) {
+        Import-Module -name posh-git
+    }
+}
+
+getModules
 
 $env:POSH_GIT_ENABLED = $true
 
@@ -27,6 +39,8 @@ $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
     Import-Module "$ChocolateyProfile"
 }
+
+# Import modules
 
 # Utilities
 function which ($command) {
