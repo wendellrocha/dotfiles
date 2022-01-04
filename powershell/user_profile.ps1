@@ -40,8 +40,6 @@ if (Test-Path($ChocolateyProfile)) {
     Import-Module "$ChocolateyProfile"
 }
 
-# Import modules
-
 # Utilities
 function which ($command) {
     Get-Command -Name $command -ErrorAction SilentlyContinue |

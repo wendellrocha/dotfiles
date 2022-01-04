@@ -22,7 +22,7 @@
                     "properties": {
                         "prefix": "  ",
                         "style": "folder",
-                        "postfix": "\u2800" 
+                        "postfix": "\u2800"
                     }
                 },
                 {
@@ -38,7 +38,17 @@
                         "display_status": true,
                         "display_stash_count": true,
                         "display_upstream_icon": true,
-                        "postfix": "\u2800" 
+                        "postfix": "\u2800"
+                    }
+                },
+                {
+                    "type": "go",
+                    "style": "powerline",
+                    "powerline_symbol": "\uE0B0",
+                    "foreground": "#ffffff",
+                    "background": "#7FD5EA",
+                    "properties": {
+                        "prefix": " \uFCD1\u2800"
                     }
                 },
                 {
@@ -62,7 +72,7 @@
                     "leading_diamond": "",
                     "trailing_diamond": "",
                     "properties": {
-                        "postfix": "\u2800" 
+                        "postfix": "\u2800"
                     }
                 },
                 {
@@ -95,7 +105,7 @@
                         "error_color": "#f1184c",
                         "template": "\uE23A",
                         "prefix": "<parentBackground>\uE0B0</>\u2800",
-                        "postfix": "\u2800" 
+                        "postfix": "\u2800"
                     }
                 }
             ]
