@@ -18,6 +18,7 @@ function getModules() {
 getModules
 
 $env:POSH_GIT_ENABLED = $true
+$env:AZ_ENABLED = $false
 
 function Get-ScriptDirectory { Split-Path $MyInvocation.ScriptName }
 $PROMPT_CONFIG = Join-Path (Get-ScriptDirectory) 'jandedobbeleer.omp.json'
@@ -33,6 +34,7 @@ Set-Alias cat bat
 Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
 
 oh-my-posh --init --shell pwsh --config $PROMPT_CONFIG | Invoke-Expression
+Enable-PoshTooltips
 
 # Chocolatey profile
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
@@ -42,19 +44,19 @@ if (Test-Path($ChocolateyProfile)) {
 
 # Dracula readline configuration. Requires version 2.0, if you have 1.2 convert to `Set-PSReadlineOption -TokenType`
 Set-PSReadlineOption -Color @{
-    "Command" = [ConsoleColor]::Green
+    "Command"   = [ConsoleColor]::Green
     "Parameter" = [ConsoleColor]::Gray
-    "Operator" = [ConsoleColor]::Magenta
-    "Variable" = [ConsoleColor]::White
-    "String" = [ConsoleColor]::Yellow
-    "Number" = [ConsoleColor]::Blue
-    "Type" = [ConsoleColor]::Cyan
-    "Comment" = [ConsoleColor]::DarkCyan
+    "Operator"  = [ConsoleColor]::Magenta
+    "Variable"  = [ConsoleColor]::White
+    "String"    = [ConsoleColor]::Yellow
+    "Number"    = [ConsoleColor]::Blue
+    "Type"      = [ConsoleColor]::Cyan
+    "Comment"   = [ConsoleColor]::DarkCyan
 }
 # Dracula Prompt Configuration
 $GitPromptSettings.DefaultPromptPrefix.Text = "$([char]0x2192) " # arrow unicode symbol
 $GitPromptSettings.DefaultPromptPrefix.ForegroundColor = [ConsoleColor]::Green
-$GitPromptSettings.DefaultPromptPath.ForegroundColor =[ConsoleColor]::Cyan
+$GitPromptSettings.DefaultPromptPath.ForegroundColor = [ConsoleColor]::Cyan
 $GitPromptSettings.DefaultPromptSuffix.Text = "$([char]0x203A) " # chevron unicode symbol
 $GitPromptSettings.DefaultPromptSuffix.ForegroundColor = [ConsoleColor]::Magenta
 # Dracula Git Status Configuration

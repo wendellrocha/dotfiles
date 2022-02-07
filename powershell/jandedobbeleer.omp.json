@@ -18,39 +18,6 @@
           "type": "path"
         },
         {
-          "background": "#015141",
-          "foreground": "#193549",
-          "powerline_symbol": "\ue0b0",
-          "properties": {
-            "display_stash_count": true,
-            "display_status": true,
-            "display_upstream_icon": true,
-            "template": " {{ .Status }}\u2800"
-          },
-          "style": "powerline",
-          "type": "poshgit"
-        },
-        {
-          "background": "#7FD5EA",
-          "foreground": "#ffffff",
-          "powerline_symbol": "\ue0b0",
-          "properties": {
-            "template": " \ufcd1\u2800{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
-          },
-          "style": "powerline",
-          "type": "go"
-        },
-        {
-          "background": "#906cff",
-          "foreground": "#100e23",
-          "powerline_symbol": "\ue0b0",
-          "properties": {
-            "template": " \ue235\u2800{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }} "
-          },
-          "style": "powerline",
-          "type": "python"
-        },
-        {
           "background": "#06A4CE",
           "foreground": "#ffffff",
           "powerline_symbol": "\ue0b0",
@@ -99,9 +66,28 @@
       "type": "prompt"
     }
   ],
+  "tooltips": [
+    {
+      "type": "git",
+      "tips": [
+        "git",
+        "g"
+      ],
+      "style": "diamond",
+      "foreground": "#FFFFFF",
+      "background": "#FF79C6",
+      "leading_diamond": "",
+      "trailing_diamond": "",
+      "properties": {
+        "fetch_status": true,
+        "fetch_upstream_icon": true,
+        "template": "{{ .HEAD }}{{ if .Staging.Changed }} \uF046 {{ .Staging.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Working.Changed }} \uF044 {{ .Working.String }}{{ end }}"
+      }
+    }
+  ],
   "console_title": true,
   "console_title_style": "folder",
-  "console_title_template": "{{ .Shell }} in {{ .Folder }}",
+  "console_title_template": "{{.Folder}}{{if .Root}} :: root{{end}} :: {{.Shell}}",
   "final_space": true,
   "version": 1
 }
