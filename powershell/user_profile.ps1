@@ -79,7 +79,6 @@ function flca ($command) {
     ForEach-Object {
         if (!(Test-Path -Path "$_\pubspec.yaml" -PathType Leaf)) {
             Write-Host "Pubspec not found in $_, skipping..." -ForegroundColor Red
-            continue
         }
 
         if (Test-Path -Path "$_\build") {

@@ -59,7 +59,7 @@
           "trailing_diamond": "\uE0B4",
           "properties": {
             "always_enabled": true,
-            "template": "<parentBackground>\uE0B0</> \uE23A "
+            "template": "<parentBackground>\uE0B0</>\u2800\uE23A\u2800"
           }
         }
       ],
