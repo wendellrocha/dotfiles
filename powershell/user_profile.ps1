@@ -104,6 +104,26 @@ function unzip ($file) {
     Expand-Archive -Path $file -DestinationPath $dirname
 }
 
+function emulator {
+    Clear-Host
+    Write-Host "Select an emulator to launch" -ForegroundColor Green
+    $Menu = @{}
+
+    (C:\Users\wende\AppData\Local\Android\Sdk\emulator\emulator -list-avds | cat -n) | ForEach-Object -Begin { $i = 1 } {
+        Write-Host "($i`): $_" -ForegroundColor Blue
+        $Menu.add("$i", $_)
+        $i++
+    }
+
+    Write-Host "Q: Press 'Q' to quit." -ForegroundColor Yellow
+
+    $Selection = Read-Host "Please make a selection"
+    if ($Selection -eq 'Q') { Return } Else { 
+        Write-Host "Selected $($Menu.$Selection)" -ForegroundColor Green
+        Start-Process C:\Users\wende\AppData\Local\Android\Sdk\emulator\emulator -ArgumentList '-avd', "$($Menu.$Selection)" 2>&1>$null
+    }
+}
+
 function update-profile {
     & $profile
 }
