@@ -99,7 +99,8 @@ function flget {
         flutter pub get
     }
     else {
-        Write-Host "FVM found, using flutter local" -ForegroundColor Yellow
+        $version = (cat .\.fvm\fvm_config.json | grep flutterSdkVersion | % { "$($_.Split(":")[1])" } | % { "$($_ -replace '"', '')" } | % { "$($_ -replace ',', '')" })
+        Write-Host "FVM found, using flutter local (version: $version)" -ForegroundColor Yellow
         fvm flutter pub get
     }
 }
@@ -110,7 +111,8 @@ function flc {
         flutter clean
     }
     else {
-        Write-Host "FVM found, using flutter local" -ForegroundColor Yellow
+        $version = (cat .\.fvm\fvm_config.json | grep flutterSdkVersion | % { "$($_.Split(":")[1])" } | % { "$($_ -replace '"', '')" } | % { "$($_ -replace ',', '')" })
+        Write-Host "FVM found, using flutter local (version: $version)" -ForegroundColor Yellow
         fvm flutter clean
     }
 }
