@@ -10,10 +10,10 @@
           "leading_diamond": "\ue0b6",
           "powerline_symbol": "\ue0b0",
           "properties": {
-            "style": "folder",
-            "template": " \ue5ff {{ .Path }}\u2800"
+            "style": "folder"
           },
           "style": "diamond",
+          "template": " \ue5ff {{ .Path }}\u2800",
           "trailing_diamond": "\ue0b0",
           "type": "path"
         },
@@ -21,80 +21,73 @@
           "background": "#06A4CE",
           "foreground": "#ffffff",
           "powerline_symbol": "\ue0b0",
-          "properties": {
-            "template": " \ue798 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}\u2800"
-          },
           "style": "powerline",
+          "template": " \ue798 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}\u2800",
           "type": "dart"
         },
         {
           "background": "#ffff66",
           "foreground": "#ffffff",
           "powerline_symbol": "\ue0b0",
-          "properties": {
-            "template": " \uf0e7\u2800"
-          },
           "style": "powerline",
+          "template": " \uf0e7\u2800",
           "type": "root"
         },
         {
           "background": "#83769c",
           "foreground": "#ffffff",
           "properties": {
-            "always_enabled": true,
-            "template": "<transparent>\ue0b0</> \ufbab {{ .FormattedMs }}\u2800"
+            "always_enabled": true
           },
           "style": "plain",
+          "template": "<transparent>\ue0b0</> \ufbab {{ .FormattedMs }}\u2800",
           "type": "executiontime"
         },
         {
-          "type": "exit",
-          "style": "diamond",
-          "foreground": "#ffffff",
           "background": "#00897b",
           "background_templates": [
             "{{ if gt .Code 0 }}#e91e63{{ end }}"
           ],
-          "leading_diamond": "",
-          "trailing_diamond": "\uE0B4",
+          "foreground": "#ffffff",
           "properties": {
-            "always_enabled": true,
-            "template": "<parentBackground>\uE0B0</>\u2800\uE23A\u2800"
-          }
+            "always_enabled": true
+          },
+          "style": "diamond",
+          "template": "<parentBackground>\ue0b0</>\u2800\ue23a\u2800",
+          "trailing_diamond": "\ue0b4",
+          "type": "exit"
         }
       ],
       "type": "prompt"
     }
   ],
+  "console_title_template": "{{.Folder}}{{if .Root}} :: root{{end}} :: {{.Shell}}",
+  "final_space": true,
   "tooltips": [
     {
-      "type": "git",
-      "tips": [
-        "git",
-        "g"
-      ],
-      "style": "diamond",
-      "foreground": "#44475A",
       "background": "#FF79C6",
-      "leading_diamond": "",
-      "trailing_diamond": "",
       "background_templates": [
         "{{ if or (.Working.Changed) (.Staging.Changed) }}#FFEB3B{{ end }}",
         "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#FFCC80{{ end }}",
         "{{ if gt .Ahead 0 }}#B388FF{{ end }}",
         "{{ if gt .Behind 0 }}#B388FB{{ end }}"
       ],
+      "foreground": "#44475A",
+      "leading_diamond": "\ue0b6",
       "properties": {
-        "fetch_status": true,
         "fetch_stash_count": true,
-        "fetch_upstream_icon": true,
-        "template": "{{ .UpstreamIcon }}{{ .HEAD }}{{ .BranchStatus }}{{ if .Working.Changed }} \uF044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uF046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \uF692 {{ .StashCount }}{{ end }}"
-      }
+        "fetch_status": true,
+        "fetch_upstream_icon": true
+      },
+      "style": "diamond",
+      "template": "{{ .UpstreamIcon }}{{ .HEAD }}{{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \uf692 {{ .StashCount }}{{ end }}",
+      "tips": [
+        "git",
+        "g"
+      ],
+      "trailing_diamond": "\ue0b4",
+      "type": "git"
     }
   ],
-  "console_title": true,
-  "console_title_style": "folder",
-  "console_title_template": "{{.Folder}}{{if .Root}} :: root{{end}} :: {{.Shell}}",
-  "final_space": true,
-  "version": 1
+  "version": 2
 }

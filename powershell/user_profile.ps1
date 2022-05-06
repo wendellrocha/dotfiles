@@ -4,8 +4,8 @@
 function getModules() {
     if (-not(Get-Module -name Terminal-Icons)) {
         Import-Module -name Terminal-Icons
-    }
-
+    } 
+    
     if (-not(Get-Module -name PSFzf)) {
         Import-Module -name PSFzf
     }
@@ -93,6 +93,29 @@ function flca ($command) {
     }
 }
 
+function flget {
+    if (!(Test-Path -Path ".fvm")) {
+        Write-Host "FVM not found, using flutter global" -ForegroundColor Yellow
+        flutter pub get
+    }
+    else {
+        Write-Host "FVM found, using flutter local" -ForegroundColor Yellow
+        fvm flutter pub get
+    }
+}
+
+function flc {
+    if (!(Test-Path -Path ".fvm")) {
+        Write-Host "FVM not found, using flutter global" -ForegroundColor Yellow
+        flutter clean
+    }
+    else {
+        Write-Host "FVM found, using flutter local" -ForegroundColor Yellow
+        fvm flutter clean
+    }
+}
+
+
 function export($name, $value) {
     Set-Item -Force -Path "Env:$name" -Value $value;
 }
@@ -122,8 +145,4 @@ function emulator {
         Write-Host "Selected $($Menu.$Selection)" -ForegroundColor Green
         Start-Process C:\Users\wende\AppData\Local\Android\Sdk\emulator\emulator -ArgumentList '-avd', "$($Menu.$Selection)" 2>&1>$null
     }
-}
-
-function update-profile {
-    & $profile
 }
