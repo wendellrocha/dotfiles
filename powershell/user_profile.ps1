@@ -134,7 +134,7 @@ function emulator {
     Write-Host "Select an emulator to launch" -ForegroundColor Green
     $Menu = @{}
 
-    (C:\Users\wende\AppData\Local\Android\Sdk\emulator\emulator -list-avds | cat -n) | ForEach-Object -Begin { $i = 1 } {
+    (D:\Android\Sdk\emulator\emulator -list-avds | cat -n) | ForEach-Object -Begin { $i = 1 } {
         Write-Host "($i`): $_" -ForegroundColor Blue
         $Menu.add("$i", $_)
         $i++
@@ -145,6 +145,6 @@ function emulator {
     $Selection = Read-Host "Please make a selection"
     if ($Selection -eq 'Q') { Return } Else { 
         Write-Host "Selected $($Menu.$Selection)" -ForegroundColor Green
-        Start-Process C:\Users\wende\AppData\Local\Android\Sdk\emulator\emulator -ArgumentList '-avd', "$($Menu.$Selection)" 2>&1>$null
+        Start-Process D:\Android\Sdk\emulator\emulator -ArgumentList '-avd', "$($Menu.$Selection)", '-no-audio' 2>&1>$null
     }
 }
