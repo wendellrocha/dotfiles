@@ -26,6 +26,14 @@
           "type": "dart"
         },
         {
+          "type": "node",
+          "style": "powerline",
+          "powerline_symbol": "\uE0B0",
+          "foreground": "#ffffff",
+          "background": "#6CA35E",
+          "template": " \uE718 {{ .Full }} "
+        },
+        {
           "background": "#ffff66",
           "foreground": "#ffffff",
           "powerline_symbol": "\ue0b0",
