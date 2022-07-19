@@ -4,25 +4,22 @@ sudo apt install -y curl gnupg apt-transport-https wget ca-certificates dirmngr 
 
 wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
 sudo add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 
 sudo sh -c 'wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
 sudo sh -c 'wget -qO- https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-
-echo \
-  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 sudo apt update
 
-sudo apt install -y git unzip xz-utils zip libglu1-mesa zsh tmux \
-    nodejs build-essential adoptopenjdk-8-hotspot dart exa bat neovim \
-    qemu qemu-kvm libvirt-daemon libvirt-clients bridge-utils virt-manager \
-    docker-ce docker-ce-cli containerd.io jq
+sudo apt install -y git unzip xz-utils zip libglu1-mesa zsh \
+    build-essential adoptopenjdk-8-hotspot dart bat vim jq \
 
 sudo update-alternatives --config java
-sudo systemctl enable --now libvirtd
+
+EXA_VERSION=$(curl -s "https://api.github.com/repos/ogham/exa/releases/latest" | grep -Po '"tag_name": "v\K[0-9.]+')
+curl -Lo exa.zip "https://github.com/ogham/exa/releases/latest/download/exa-linux-x86_64-v${EXA_VERSION}.zip"
+
+sudo unzip -q exa.zip bin/exa -d /usr/local
+rm -rf exa.zip
 
 echo -e "Installing oh-my-zsh\n"
 if [ -d ~/.oh-my-zsh ]; then
@@ -48,21 +45,13 @@ cd /home/$USER/Android/sdk/tools/bin && ./sdkmanager  "patcher;v4" "platform-too
     "sources;android-30"
 
 cd ~
-curl https://install.meteor.com/ | sh
-
-wget -O dart.zip https://storage.googleapis.com/dart-archive/channels/stable/release/2.10.5/sdk/dartsdk-linux-x64-release.zip
-unzip dart.zip && rm dart.zip
-mkdir /home/$USER/tools
-mv dart-sdk /home/$USER/tools/
 
 export PATH="$PATH:/home/$USER/fvm/default/bin"
 export PATH="$PATH:/home/$USER/.pub-cache/bin"
 export PATH="$PATH:/usr/lib/dart/bin"
 
 pub global activate fvm
-cat "Y" | fvm global stable
-
-sudo usermod -aG docker $USER
+# cat "Y" | fvm global 2.8.1
 
 /bin/zsh -i -c 'cd ~ && git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"'
 /bin/zsh -i -c 'ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"'
@@ -82,13 +71,9 @@ fi
 git clone https://github.com/gmarik/Vundle.vim ~/.vim/bundle/Vundle.vim
 
 echo "source $(pwd)/.zshrc" > ~/.zshrc
-mkdir /home/$USER/.config/alacritty
-mkdir /home/$USER/.config/nvim
 
 ln -sf $(pwd)/alacritty.yml /home/.config/alacritty/alacritty.yml
 ln -sf $(pwd)/.vimrc /home/$USER/.vimrc
-ln -sf $(pwd)/init.vim /home/$USER/.config/nvim/init.vim
 ln -sf $(pwd)/coc-settings.json /home/$USER/.config/nvim/coc-settings.json
 ln -sf $(pwd)/.gitconfig /home/$USER/.gitconfig
-ln -sf $(pwd)/.tmux.conf /home/$USER/.tmux.conf
 exit

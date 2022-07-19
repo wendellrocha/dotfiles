@@ -1,24 +1,31 @@
-export ZSH="/home/$USER/.oh-my-zsh"
-export ANDROID_HOME="/home/$USER/Android/sdk"
-export GOPATH="/home/$USER/go"
-export JAVA_HOME="/usr/lib/jvm/adoptopenjdk-8-hotspot-amd64"
-export PATH="$PATH:/home/$USER/Android/sdk/platform-tools"
-export PATH="$PATH:/home/$USER/fvm/default/bin"
-export PATH="$PATH:/home/$USER/.pub-cache/bin"
-export PATH="$PATH:/home/$USER/tools/dart-sdk/bin"
-export PATH="$PATH:/$JAVA_HOME/bin:$PATH"
-export PATH="$PATH:/opt/go/bin"
-export PATH="$PATH:$(go env GOPATH)/bin"
-export PATH="$PATH:/home/$USER/.local/bin"
-export PATH="$PATH:/opt/mitm"
-export PATH="/opt/Komodo-IDE/bin:$PATH"
+if [[ $(id -u) -ne 0 ]] ; then
+  export ZSH="/home/$USER/.oh-my-zsh"
+  export ANDROID_HOME="/home/$USER/Android/sdk"
+  export GOPATH="/home/$USER/go"
+  export JAVA_HOME="/usr/bin/java"
+  export PATH="$PATH:/home/$USER/Android/sdk/platform-tools"
+  export PATH="$PATH:/home/$USER/fvm/default/bin"
+  export PATH="$PATH:/home/$USER/.pub-cache/bin"
+  export PATH="$PATH:/$JAVA_HOME/bin:$PATH"
+  export PATH="$PATH:/opt/go/bin"
+  export PATH="$PATH:$(go env GOPATH)/bin"
+  export PATH="$PATH:/home/$USER/.local/bin"
+  export PATH="$PATH:/opt/mitm"
+else
+  export ZSH="/root/.oh-my-zsh"
+  export ANDROID_HOME="/home/wendell/Android/sdk"
+  export PATH="$PATH:/home/wendell/Android/sdk/platform-tools"
+fi
 
 ZSH_THEME="spaceship"
 
-plugins=(git bgnotify flutter meteor vscode)
+plugins=(git bgnotify flutter vscode)
 
 source $ZSH/oh-my-zsh.sh
-source "$HOME/dotfiles/utils.sh"
+
+if [[ $(id -u) -ne 0 ]] ; then
+  source "$HOME/dotfiles/utils.sh"
+fi
 
 SPACESHIP_PROMPT_ORDER=(
   user          # Username section
@@ -33,13 +40,22 @@ SPACESHIP_PROMPT_ORDER=(
   exit_code     # Exit code section
   char          # Prompt character
 )
+
 SPACESHIP_USER_SHOW=always
 SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_CHAR_SUFFIX=" "
+DISABLE_AUTO_TITLE="true"
 
 export TERM="screen-256color"
 
-eval "$(rbenv init -)"
+kernel_string=$(uname -r)
+
+if [[ $kernel_string == *"WSL"* ]]; then
+  alias exp='/mnt/c/WINDOWS/explorer.exe'
+  alias code='/mnt/c/Users/wende/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code'
+fi
+
+
 alias ls="exa -abghHlS --git"
 alias cat="batcat --color=always --style=numbers"
 
@@ -53,29 +69,26 @@ export FZF_DEFAULT_OPTS="
   --pointer='▶'
   --marker='│'
 "
-
 ### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
 fi
 
-source "$HOME/.zinit/bin/zinit.zsh"
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
 zinit light-mode for \
-    zinit-zsh/z-a-rust \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node
+    zdharma-continuum/zinit-annex-readurl \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
 
 ### End of Zinit's installer chunk
-zinit light zdharma/fast-syntax-highlighting
+zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
