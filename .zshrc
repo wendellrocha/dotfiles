@@ -1,14 +1,11 @@
 if [[ $(id -u) -ne 0 ]] ; then
   export ZSH="/home/$USER/.oh-my-zsh"
   export ANDROID_HOME="/home/$USER/Android/sdk"
-  export GOPATH="/home/$USER/go"
-  export JAVA_HOME="/usr/bin/java"
+  export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
   export PATH="$PATH:/home/$USER/Android/sdk/platform-tools"
   export PATH="$PATH:/home/$USER/fvm/default/bin"
   export PATH="$PATH:/home/$USER/.pub-cache/bin"
   export PATH="$PATH:/$JAVA_HOME/bin:$PATH"
-  export PATH="$PATH:/opt/go/bin"
-  export PATH="$PATH:$(go env GOPATH)/bin"
   export PATH="$PATH:/home/$USER/.local/bin"
   export PATH="$PATH:/opt/mitm"
 else
@@ -25,6 +22,7 @@ source $ZSH/oh-my-zsh.sh
 
 if [[ $(id -u) -ne 0 ]] ; then
   source "$HOME/dotfiles/utils.sh"
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 SPACESHIP_PROMPT_ORDER=(
@@ -56,7 +54,7 @@ if [[ $kernel_string == *"WSL"* ]]; then
 fi
 
 
-alias ls="exa -abghHlS --git"
+alias ls="exa -abghHlS"
 alias cat="batcat --color=always --style=numbers"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
