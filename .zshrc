@@ -1,17 +1,30 @@
-if [[ $(id -u) -ne 0 ]] ; then
-  export ZSH="/home/$USER/.oh-my-zsh"
-  export ANDROID_HOME="/home/$USER/Android/sdk"
-  export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
-  export PATH="$PATH:/home/$USER/Android/sdk/platform-tools"
-  export PATH="$PATH:/home/$USER/fvm/default/bin"
-  export PATH="$PATH:/home/$USER/.pub-cache/bin"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export ZSH="/Users/$USER/.oh-my-zsh"
+  export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home"
+  export ANDROID_HOME="$HOME/Library/Android/sdk"
+  export PATH="$PATH:$ANDROID_HOME/emulator"
+  export PATH="$PATH:$ANDROID_HOME/platform-tools"
+  # export PATH="$PATH:/Users/$USER/fvm/default/bin"
+  # export PATH="$PATH:/Users/$USER/.pub-cache/bin"
+  # export PATH="$PATH:/Users/$USER/.local/bin"
+  # export PATH="$PATH:/opt/mitm"
   export PATH="$PATH:/$JAVA_HOME/bin:$PATH"
-  export PATH="$PATH:/home/$USER/.local/bin"
-  export PATH="$PATH:/opt/mitm"
-else
-  export ZSH="/root/.oh-my-zsh"
-  export ANDROID_HOME="/home/wendell/Android/sdk"
-  export PATH="$PATH:/home/wendell/Android/sdk/platform-tools"
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  if [[ $(id -u) -ne 0 ]] ; then
+    export ZSH="/home/$USER/.oh-my-zsh"
+    export ANDROID_HOME="/home/$USER/Android/sdk"
+    export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+    export PATH="$PATH:/home/$USER/Android/sdk/platform-tools"
+    export PATH="$PATH:/home/$USER/fvm/default/bin"
+    export PATH="$PATH:/home/$USER/.pub-cache/bin"
+    export PATH="$PATH:/$JAVA_HOME/bin:$PATH"
+    export PATH="$PATH:/home/$USER/.local/bin"
+    export PATH="$PATH:/opt/mitm"
+  else
+    export ZSH="/root/.oh-my-zsh"
+    export ANDROID_HOME="/home/wendell/Android/sdk"
+    export PATH="$PATH:/home/wendell/Android/sdk/platform-tools"
+  fi
 fi
 
 ZSH_THEME="spaceship"
@@ -22,7 +35,11 @@ source $ZSH/oh-my-zsh.sh
 
 if [[ $(id -u) -ne 0 ]] ; then
   source "$HOME/dotfiles/utils.sh"
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    eval $(/opt/homebrew/bin/brew shellenv)
+  else
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  fi
 fi
 
 SPACESHIP_PROMPT_ORDER=(
@@ -33,13 +50,14 @@ SPACESHIP_PROMPT_ORDER=(
   node          # NodeJS
   exec_time     # Execution time
   line_sep      # Line break
-  vi_mode       # Vi-mode indicator
   jobs          # Background jobs indicator
   exit_code     # Exit code section
   char          # Prompt character
 )
 
 SPACESHIP_USER_SHOW=always
+SPACESHIP_GIT_SHOW=true
+SPACESHIP_GIT_ASYNC=false
 SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_CHAR_SUFFIX=" "
 DISABLE_AUTO_TITLE="true"
