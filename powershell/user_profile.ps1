@@ -21,7 +21,7 @@ $env:POSH_GIT_ENABLED = $true
 $env:AZ_ENABLED = $false
 
 function Get-ScriptDirectory { Split-Path $MyInvocation.ScriptName }
-$PROMPT_CONFIG = Join-Path (Get-ScriptDirectory) 'jandedobbeleer.omp.json'
+$PROMPT_CONFIG = Join-Path (Get-ScriptDirectory) 'spaceship.omp.json'
 
 Set-PSReadLineOption -PredictionSource History
 
