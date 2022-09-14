@@ -17,13 +17,21 @@ function isFlutterProject() {
 }
 
 function emulator() {
-    /home/$USER/Android/sdk/emulator/emulator -list-avds | cat -n
+    EMULATOR_DIR=""
+
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        EMULATOR_DIR=$ANDROID_HOME/emulator
+    else
+        EMULATOR_DIR=/home/$USER/Android/sdk/emulator/
+    fi
+
+    $EMULATOR_DIR/emulator -list-avds | cat -n
     echo "${YELLOW}Please select an avd:${END}"
     read index
-    avd=$(/home/$USER/Android/sdk/emulator/emulator -list-avds | sed "${index}q;d")
+    avd=$($EMULATOR_DIR/emulator -list-avds | sed "${index}q;d")
     [[ -n $avd ]] || { echo "${RED}Invalid choice. Please try again.${END}" >&2; return 1; }
     echo "${GREEN}Selected${END} ${CYAN}$avd${END}"
-    /home/$USER/Android/sdk/emulator/emulator -avd $avd > /dev/null 2>&1 &;disown
+    $EMULATOR_DIR/emulator -avd $avd > /dev/null 2>&1 &;disown
 }
 
 function hasParameters() {
@@ -44,65 +52,6 @@ function buildDirExists() {
     fi
 }
 
-function flbu() {
-    if isFlutterProject
-    then
-        if hasParameters "$1" "$2" "flbu <flavor> <true|false>"
-        then
-            buildDirExists
-            echo -e "\U1F680 ${GREEN}Build appbundle: flb appbundle --no-sound-null-safety --flavor $1 --dart-define=isQA=$2${END}"
-            flb appbundle --no-sound-null-safety --flavor $1 --dart-define=isQA=$2
-        fi
-    fi
-}
-
-function flbs() {
-    if isFlutterProject
-    then
-        if hasParameters "$1" "$2" "flbu <flavor> <true|false>"
-        then
-            buildDirExists
-            echo -e "\U1F680 ${GREEN}Build appbundle: flb appbundle --flavor $1 --dart-define=isQA=$2${END}"
-            flb appbundle --flavor $1 --dart-define=isQA=$2
-        fi
-    fi
-}
-
-function flku() {
-    if isFlutterProject
-    then
-        if hasParameters "$1" "$2" "flbu <flavor> <true|false>"
-        then
-            buildDirExists
-            echo -e "\U1F4E6 ${GREEN}Build APK: flb apk --split-per-abi --no-sound-null-safety --flavor $1 --dart-define=isQA=$2${END}"
-            flb apk --split-per-abi --no-sound-null-safety --flavor $1 --dart-define=isQA=$2
-        fi
-    fi
-}
-
-function flks() {
-    if isFlutterProject
-    then
-        if hasParameters "$1" "$2" "flbu <flavor> <true|false>"
-        then
-            buildDirExists
-            echo -e "\U1F4E6 ${GREEN}Build APK \U1F5C2: flb apk --split-per-abi --flavor $1 --dart-define=isQA=$2${END}"
-            flb apk --split-per-abi --flavor $1 --dart-define=isQA=$2
-        fi
-    fi
-}
-
-function flru() {
-    if isFlutterProject
-    then
-        if hasParameters "$1" "$2" "flbu <flavor> <true|false>"
-        then
-            echo -e "\U1F525 ${GREEN}Running: flr --flavor $1 --dart-define=isQA=$2${END}"
-            flr --flavor $1 --dart-define=isQA=$2
-        fi
-    fi
-}
-
 function flca() {
     for d in ./*/ ; do (cd "$d" && buildDirExists); done
 }
@@ -113,5 +62,15 @@ function rcd() {
         return 1
     else
         for d in ./*/ ; do (cd "$d" && $1); done
+    fi
+}
+
+function bankeiro-run() {
+    DIR_NAME=${PWD##*/}
+    echo $DIR_NAME
+    if [[ "$DIR_NAME" == "bankeiro_app" ]]; then
+        cd packages/mobile/android && ./gradlew clean && cd ../ && yarn android --active-arch-only && yarn start --reset-cache
+    else
+        echo "${RED}Error: Nothing to do, exiting...${END}"
     fi
 }
