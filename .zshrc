@@ -73,7 +73,11 @@ fi
 
 
 alias ls="exa -abghHlS"
-alias cat="batcat --color=always --style=numbers"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  alias cat="bat --color=always --style=numbers"
+else
+  alias cat="batcat --color=always --style=numbers"
+fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND=find
