@@ -29,7 +29,7 @@ fi
 
 ZSH_THEME="spaceship"
 
-plugins=(git bgnotify flutter vscode)
+plugins=(git bgnotify)
 
 source $ZSH/oh-my-zsh.sh
 
