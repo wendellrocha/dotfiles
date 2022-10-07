@@ -64,20 +64,7 @@ DISABLE_AUTO_TITLE="true"
 
 export TERM="screen-256color"
 
-kernel_string=$(uname -r)
-
-if [[ $kernel_string == *"WSL"* ]]; then
-  alias exp='/mnt/c/WINDOWS/explorer.exe'
-  alias code='/mnt/c/Users/wende/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code'
-fi
-
-
-alias ls="exa -abghHlS"
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  alias cat="bat --color=always --style=numbers"
-else
-  alias cat="batcat --color=always --style=numbers"
-fi
+source "$HOME/dotfiles/aliases.sh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND=find
