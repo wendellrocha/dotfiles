@@ -6,9 +6,12 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     if [[ ! -z "$VSCODE" ]]; then
         alias code="code-insiders"
     fi
+    node=$(which node)
 else
     alias cat="batcat --color=always --style=numbers"
 fi
+
+alias ls="exa -abghHlS --icons"
 
 kernel_string=$(uname -r)
 
