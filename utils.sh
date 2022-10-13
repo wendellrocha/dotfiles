@@ -45,8 +45,14 @@ function hasParameters() {
 
 function buildDirExists() {
     if [[ -d "build" || -d ".dart_tool" ]]; then
-        echo -e "\U1F9F9 ${GREEN}Running flc in ${PWD##*/}${END}"
-        flc
+        echo -e "\U1F9F9 ${GREEN}Running flutter clean in ${PWD##*/}${END}"
+        version=$(cat .fvm/fvm_config.json | grep flutterSdkVersion | cut -f2 -d":" | cut -f1 -d"," | tr -d '"')
+        if [[ ! -z $version ]]; then
+            echo "${YELLOW}FVM found, using flutter local (version: $version)${END}"
+        else 
+            echo "${YELLOW}FVM not found, using flutter global${END}"
+        fi
+        fvm flutter clean
     else
          echo "${YELLOW}Nothing to do, skipping$2${END}"
     fi
@@ -54,6 +60,27 @@ function buildDirExists() {
 
 function flca() {
     for d in ./*/ ; do (cd "$d" && buildDirExists); done
+}
+
+function flc() {
+    if isFlutterProject
+    then
+        buildDirExists
+    fi
+}
+
+function flget() {
+    if isFlutterProject
+    then
+        echo -e "\U1F9F9 ${GREEN}Running flutter pub get in ${PWD##*/}${END}"
+        version=$(cat .fvm/fvm_config.json | grep flutterSdkVersion | cut -f2 -d":" | cut -f1 -d"," | tr -d '"')
+        if [[ ! -z $version ]]; then
+            echo "${YELLOW}FVM found, using flutter local (version: $version)${END}"
+        else 
+            echo "${YELLOW}FVM not found, using flutter global${END}"
+        fi
+        fvm flutter pub get
+    fi
 }
 
 function rcd() {
