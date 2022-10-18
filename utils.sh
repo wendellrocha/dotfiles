@@ -31,7 +31,7 @@ function emulator() {
     avd=$($EMULATOR_DIR/emulator -list-avds | sed "${index}q;d")
     [[ -n $avd ]] || { echo "${RED}Invalid choice. Please try again.${END}" >&2; return 1; }
     echo "${GREEN}Selected${END} ${CYAN}$avd${END}"
-    $EMULATOR_DIR/emulator -avd $avd > /dev/null 2>&1 &;disown
+    $EMULATOR_DIR/emulator -avd $avd -no-audio > /dev/null 2>&1 &;disown
 }
 
 function hasParameters() {
