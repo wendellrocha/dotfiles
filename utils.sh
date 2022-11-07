@@ -1,10 +1,10 @@
 #!/bin/bash
 
-RED="\e[31m"
-GREEN="\e[32m"
-YELLOW="\e[33m"
-CYAN="\e[36m"
-END="\e[0m"
+export RED="\e[31m"
+export GREEN="\e[32m"
+export YELLOW="\e[33m"
+export CYAN="\e[36m"
+export END="\e[0m"
 
 function isFlutterProject() {
     if [ ! -f "pubspec.yaml" ]; then

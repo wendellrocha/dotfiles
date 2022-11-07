@@ -1,3 +1,7 @@
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
   export ZSH="/Users/$USER/.oh-my-zsh"
   export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home"
@@ -26,6 +30,9 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     export PATH="$PATH:/home/wendell/Android/sdk/platform-tools"
   fi
 fi
+
+
+
 
 ZSH_THEME="spaceship"
 
