@@ -1,3 +1,4 @@
+export LANG=en_US.UTF-8
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -31,14 +32,12 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   fi
 fi
 
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
 
-
-
-ZSH_THEME="spaceship"
-
-plugins=(git bgnotify)
-
-source $ZSH/oh-my-zsh.sh
+source "$HOME/dotfiles/aliases.sh"
+export TERM="screen-256color"
 
 if [[ $(id -u) -ne 0 ]] ; then
   source "$HOME/dotfiles/utils.sh"
@@ -48,30 +47,6 @@ if [[ $(id -u) -ne 0 ]] ; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   fi
 fi
-
-SPACESHIP_PROMPT_ORDER=(
-  user          # Username section
-  dir           # Current directory section
-  host          # Hostname section
-  git           # Git section (git_branch + git_status)
-  node          # NodeJS
-  exec_time     # Execution time
-  line_sep      # Line break
-  jobs          # Background jobs indicator
-  exit_code     # Exit code section
-  char          # Prompt character
-)
-
-SPACESHIP_USER_SHOW=always
-SPACESHIP_GIT_SHOW=true
-SPACESHIP_GIT_ASYNC=false
-SPACESHIP_PROMPT_ADD_NEWLINE=false
-SPACESHIP_CHAR_SUFFIX=" "
-DISABLE_AUTO_TITLE="true"
-
-export TERM="screen-256color"
-
-source "$HOME/dotfiles/aliases.sh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND=find

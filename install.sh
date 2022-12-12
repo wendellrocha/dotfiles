@@ -49,21 +49,6 @@ cat "Y" | fvm global stable
 
 sudo usermod -aG docker $USER
 
-#/bin/zsh -i -c 'cd ~ && git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"'
-#/bin/zsh -i -c 'ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"'
-
-#echo -e "\nSudo access is needed to change default shell\n"
-
-#if chsh -s $(which zsh) && /bin/zsh -i -c omz update; then
-#    echo -e "Installation Successful, exit terminal and enter a new session"
-#else
-#    echo -e "Something is wrong"
-#fi
-
-#if mv -n ~/.zshrc ~/.zshrc-backup-$(date +"%Y-%m-%d"); then # backup .zshrc
-#    echo -e "Backed up the current .zshrc to .zshrc-backup-date\n"
-#fi
-
 git clone https://github.com/gmarik/Vundle.vim ~/.vim/bundle/Vundle.vim
 
 mkdir /home/$USER/.config

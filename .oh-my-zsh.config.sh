@@ -1,0 +1,25 @@
+ZSH_THEME="spaceship"
+
+plugins=(git bgnotify)
+
+source $ZSH/oh-my-zsh.sh
+
+SPACESHIP_PROMPT_ORDER=(
+  user          # Username section
+  dir           # Current directory section
+  host          # Hostname section
+  git           # Git section (git_branch + git_status)
+  node          # NodeJS
+  exec_time     # Execution time
+  line_sep      # Line break
+  jobs          # Background jobs indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+
+SPACESHIP_USER_SHOW=always
+SPACESHIP_GIT_SHOW=true
+SPACESHIP_GIT_ASYNC=false
+SPACESHIP_PROMPT_ADD_NEWLINE=false
+SPACESHIP_CHAR_SUFFIX=" "
+DISABLE_AUTO_TITLE="true"
