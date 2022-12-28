@@ -16,7 +16,10 @@ Plug 'preservim/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'xolox/vim-easytags'
 Plug 'majutsushi/tagbar'
-Plug 'sheerun/vim-polyglot'
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'thosakwe/vim-flutter'
+Plug 'natebosch/vim-lsc'
+Plug 'natebosch/vim-lsc-dart'
 Plug 'xolox/vim-misc'
 Plug 'kien/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
@@ -26,12 +29,10 @@ Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular'
 Plug 'luochen1990/rainbow'
 Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'vimsence/vimsence'
 Plug 'gko/vim-coloresque'
 Plug 'scrooloose/syntastic'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
 
@@ -61,42 +62,14 @@ let g:airline#extensions#tabline#enabled=1
 filetype plugin indent on
 
 set autowrite
-" Go syntax highlighting
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_operators = 1
-
-" Auto formatting and importing
-let g:go_fmt_autosave = 1
-let g:go_fmt_command = "goimports"
-
-" Status line types/signatures
-let g:go_auto_type_info = 1
-
-" Run :GoBuild or :GoTestCompile based on the go file
-function! s:build_go_files()
-  let l:file = expand('%')
-  if l:file =~# '^\f\+_test\.go$'
-    call go#test#Test(0, 1)
-  elseif l:file =~# '^\f\+\.go$'
-    call go#cmd#Build(0)
-  endif
-endfunction
-
-" Map keys for most used commands.
-" Ex: `\b` for building, `\r` for running and `\b` for running test.
-autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
-autocmd FileType go nmap <leader>t  <Plug>(go-test)
 
 " ----- jistr/vim-nerdtree-tabs -----
-" Open/close NERDTree Tabs with \t
-nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+" Open/close NERDTree Tabs with CTRL + B
+nmap <silent> <C-b> :NERDTreeTabsToggle<CR>
 " To have NERDTree always open on startup
 let g:nerdtree_tabs_open_on_console_startup = 0
-
+" Start NERDTree and put the cursor back in the other window.
+autocmd VimEnter * NERDTree | wincmd p
 " ----- scrooloose/syntastic settings -----
 let g:syntastic_error_symbol = '✘'
 let g:syntastic_warning_symbol = "▲"
@@ -140,7 +113,7 @@ augroup END
 " ---- dart-lang/dart-lang settings -----
 let dart_html_in_string=v:true
 let g:dart_style_guide = 2
-let g:dart_format_on_save = 0
+let g:dart_format_on_save = 1
 
 " Use all the defaults (recommended):
 let g:lsc_auto_map = v:true
