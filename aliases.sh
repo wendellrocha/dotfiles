@@ -11,6 +11,13 @@ else
     alias cat="batcat --color=always --style=numbers,changes,header"
 fi
 
+
+if [[ -d "$HOME/.nvm" ]]; then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
+
 alias ls="exa -abghHlS --icons"
 
 kernel_string=$(uname -r)
