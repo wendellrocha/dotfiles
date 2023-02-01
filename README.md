@@ -6,3 +6,6 @@ install everything from the Brewfile
 
 bootstrap zsh with prezto
 `./bootstrap.sh`
+
+defaults write com.apple.TextEdit NSShowAppCentricOpenPanelInsteadOfUntitledFile -bool false
+
