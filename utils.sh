@@ -101,3 +101,12 @@ function bankeiro-run() {
         echo "${RED}Error: Nothing to do, exiting...${END}"
     fi
 }
+
+function clear-branches() {
+    if [[ ! -d ".git" ]]; then
+        echo "${RED}Nothing to do, exiting...${END}"
+        return 1
+    fi
+    
+    git branch -vv | grep ': gone]'|  grep -v "\*" | awk '{ print $1; }' | xargs -r git branch -d
+}
