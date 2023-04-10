@@ -7,6 +7,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   export PATH="$PATH:$ANDROID_HOME/emulator"
   export PATH="$PATH:$ANDROID_HOME/platform-tools"
   export PATH="$PATH:/Users/$USER/development/flutter/bin"
+  export PATH="$PATH:/Users/$USER/development/bin"
   export PATH="$PATH:/Users/$USER/.pub-cache/bin"
   export PATH="$PATH:/Users/$USER/.local/bin"
   export REACT_TERMINAL=iTerm
