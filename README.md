@@ -10,9 +10,9 @@ bootstrap zsh with prezto
 defaults write com.apple.TextEdit NSShowAppCentricOpenPanelInsteadOfUntitledFile -bool false
 
 One-liner pra desinstalar brews com direito a descrição como preview.
-Pra escolher vários é só marcar com <TAB>:
+Pra escolher vários é só marcar com `<TAB>`:
 
  ```
-❯ brew rm `brew ls | fzf --preview='brew info {}'`
+❯ brew rm `brew ls | fzf -m --preview='brew info {}'``
 ```
 
