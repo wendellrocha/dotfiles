@@ -92,13 +92,22 @@ function rcd() {
     fi
 }
 
-function bankeiro-run() {
+function bankeiro-run-android() {
     DIR_NAME=${PWD##*/}
-    echo $DIR_NAME
     if [[ "$DIR_NAME" == "bankeiro_app" ]]; then
         cd packages/mobile/android && ./gradlew clean && cd ../ && yarn android --active-arch-only && yarn start --reset-cache
     else
         echo "${RED}Error: Nothing to do, exiting...${END}"
+    fi
+}
+
+function bankeiro-run-ios() {
+    DIR_NAME=${PWD##*/}
+    if [[ "$DIR_NAME" == "bankeiro_app" ]]; then
+        yarn native:ios --simulator="iPhone 14 Pro Max"
+    else
+        echo "${RED}Error: Nothing to do, exiting...${END}"
+        exit
     fi
 }
 
