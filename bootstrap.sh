@@ -19,6 +19,9 @@ if [ ! -x "$(command -v starship)" ]; then
     curl -sS https://starship.rs/install.sh | sh
 fi
 
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n
+ln -sf $(pwd)/kitty.conf ~/.config/kitty/kitty.conf
+
 cat > ~/.zshrc << EOF
 source $(pwd)/.zshrc
 # Fig pre block. Keep at the top of this file.

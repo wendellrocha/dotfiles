@@ -10,7 +10,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   export PATH="$PATH:/Users/$USER/development/bin"
   export PATH="$PATH:/Users/$USER/.pub-cache/bin"
   export PATH="$PATH:/Users/$USER/.local/bin"
-  export REACT_TERMINAL=iTerm
+  export REACT_TERMINAL=kitty
   export PATH="$PATH:/$JAVA_HOME/bin:$PATH"
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   if [[ $(id -u) -ne 0 ]] ; then

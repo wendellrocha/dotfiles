@@ -26,3 +26,8 @@ if [[ $kernel_string == *"WSL"* ]]; then
   alias exp='/mnt/c/WINDOWS/explorer.exe'
   alias code='/mnt/c/Users/wende/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code'
 fi
+
+if [[ -x "$(command -v kitten)" ]]; then
+    alias icat="kitty +kitten icat"
+    alias d="kitty +kitten diff"
+fi
