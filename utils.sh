@@ -119,3 +119,13 @@ function clear-branches() {
     
     git branch -vv | grep ': gone]'|  grep -v "\*" | awk '{ print $1; }' | xargs -r git branch -d
 }
+
+function cfile() {
+    if [[ -z "$1" || -z "$2" ]]; then
+        echo "${RED}Error: No argument supplied. Usage: cfile <movie> <extension>${END}"
+        return 1
+    else
+        fileName=$(echo $1 | cut -d "." -f 1)
+        ffmpeg -i $1 "$fileName.$2"
+    fi
+}
