@@ -37,9 +37,9 @@ Plug 'neovim/nvim-lspconfig'
 
 call plug#end()
 
-lua << EOF 
-require'lspconfig'.tsserver.setup{}
-EOF
+"--lua << EOF 
+"--require'lspconfig'.tsserver.setup{}
+"--EOF
 " --- General settings ---
 "let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 "let &t_8b = "\<Esc>[48:2;%lu;%lu;%lum"
