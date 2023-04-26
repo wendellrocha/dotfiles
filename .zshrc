@@ -46,6 +46,8 @@ if [[ $(id -u) -ne 0 ]] ; then
   fi
 fi
 
+[ -f ~/.iterm2_shell_integration.zsh ] && source ~/.iterm2_shell_integration.zsh
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND=find
 export FZF_DEFAULT_OPTS="

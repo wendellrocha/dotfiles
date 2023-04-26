@@ -7,6 +7,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         alias code="code-insiders"
     fi
     node=$(which node)
+    export NODE_BINARY=$(which node)
 else
     alias cat="batcat --color=always --style=numbers,changes,header"
 fi

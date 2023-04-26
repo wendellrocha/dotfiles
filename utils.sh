@@ -129,3 +129,11 @@ function cfile() {
         ffmpeg -i $1 "$fileName.$2"
     fi
 }
+
+function getIp() {
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\  -f2
+    else
+        ip a | grep "scope" | grep -Po '(?<=inet )[\d.]+'
+    fi
+}
