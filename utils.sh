@@ -137,3 +137,16 @@ function getIp() {
         ip a | grep "scope" | grep -Po '(?<=inet )[\d.]+'
     fi
 }
+
+function countfiles(){
+  find $1 -type f | wc -l
+}
+
+
+function website-status(){
+  curl -s --head --request GET $1 | grep "200 OK"
+}
+
+function copy () {
+  pbcopy < $1
+}

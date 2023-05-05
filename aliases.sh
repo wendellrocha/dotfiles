@@ -3,6 +3,7 @@
 if [[ "$OSTYPE" == "darwin"* ]]; then
     VSCODE=$(mdfind -literal 'kMDItemFSName=="Visual Studio Code - Insiders.app"')
     alias cat="bat --color=always --style=numbers,changes,header"
+    alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
     if [[ ! -z "$VSCODE" ]]; then
         alias code="code-insiders"
     fi
@@ -20,6 +21,21 @@ if [[ -d "$HOME/.nvm" ]]; then
 fi
 
 alias ls="exa -abghHlS --icons"
+alias ports='netstat -a | grep -i "listen"'
+alias reload='source ~/.zshrc'
+alias backup='tar -zcvf $(date +%Y%m%d).tar.gz *'
+alias path='echo -e ${PATH//:/\\n}'
+alias cp='rsync --progress -avz --ignore-existing'
+alias tree='tree -C --dirsfirst --gitignore -I "infrastructure|android|ios|shared|macos|web|windows|linux|.fvm|build|.dart_tool|.idea|.vscode|.vs|.fleet|.flutter-*|.metadata|*.iml"'
+alias publicip='curl ifconfig.me'
+alias extract='for i in *.gz; do tar xvf $i; done'
+alias du1='du -h -d 1'
+alias today='date +"%A, %B %d, %Y"'
+alias weather='function _weather() { curl wttr.in/$1; }; _weather'
+alias free='free -m -h'
+alias rename='function _rename() { for i in *$1*; do mv "$i" "${i/$1/$2}"; done }; _rename'
+alias to='function _to() { (cd "$@" && tree;) }; _to'
+alias search='function _search() { grep -r --exclude-dir={.git,.svn,infrastructure,android,ios,shared,macos,web,windows,linux,.fvm,build,.dart_tool,.idea,.vscode,.vs,.fleet,.flutter-*,.metadata,*.iml} $1 *; }; _search'
 
 kernel_string=$(uname -r)
 
