@@ -150,3 +150,6 @@ function website-status(){
 function copy () {
   pbcopy < $1
 }
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    source $HOME/dotfiles/macos/update-all.zsh
+fi
