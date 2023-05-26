@@ -36,6 +36,7 @@ alias free='free -m -h'
 alias rename='function _rename() { for i in *$1*; do mv "$i" "${i/$1/$2}"; done }; _rename'
 alias to='function _to() { (cd "$@" && tree;) }; _to'
 alias search='function _search() { grep -r --exclude-dir={.git,.svn,infrastructure,android,ios,shared,macos,web,windows,linux,.fvm,build,.dart_tool,.idea,.vscode,.vs,.fleet,.flutter-*,.metadata,*.iml} $1 *; }; _search'
+alias gdiscard='git clean -df && git checkout -- .'
 
 kernel_string=$(uname -r)
 

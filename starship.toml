@@ -10,7 +10,7 @@ success_symbol = "[~>](bold green)" # The "success_symbol" segment is being set 
 error_symbol = "[✗](bold red)"
 
 [username]
-style_user = "#ff99ff"
+style_user = "#ffa04d"
 style_root = "red bold"
 format = "[$user]($style) in "
 disabled = false
