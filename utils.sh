@@ -45,13 +45,13 @@ function hasParameters() {
 
 function buildDirExists() {
     if [[ -d "build" || -d ".dart_tool" ]]; then
-        echo -e "\U1F9F9 ${GREEN}Running flutter clean in ${PWD##*/}${END}"
         version=$(cat .fvm/fvm_config.json | grep flutterSdkVersion | cut -f2 -d":" | cut -f1 -d"," | tr -d '"')
         if [[ ! -z $version ]]; then
-            echo "${YELLOW}FVM found, using flutter local (version: $version)${END}"
+            echo "${YELLOW}FVM found, using flutter local (version: $version${YELLOW})${END}"
         else 
             echo "${YELLOW}FVM not found, using flutter global${END}"
         fi
+        echo -e "\U1F9F9 ${GREEN}Running flutter clean in ${PWD##*/}${END}"
         fvm flutter clean
     else
          echo "${YELLOW}Nothing to do, skipping$2${END}"
@@ -62,23 +62,27 @@ function flca() {
     for d in ./*/ ; do (cd "$d" && buildDirExists); done
 }
 
+function flci() {
+    if isFlutterProject; then
+        buildDirExists && flget
+    fi
+}
+
 function flc() {
-    if isFlutterProject
-    then
+    if isFlutterProject; then
         buildDirExists
     fi
 }
 
 function flget() {
-    if isFlutterProject
-    then
-        echo -e "\U1F9F9 ${GREEN}Running flutter pub get in ${PWD##*/}${END}"
+    if isFlutterProject; then
         version=$(cat .fvm/fvm_config.json | grep flutterSdkVersion | cut -f2 -d":" | cut -f1 -d"," | tr -d '"')
         if [[ ! -z $version ]]; then
-            echo "${YELLOW}FVM found, using flutter local (version: $version)${END}"
+            echo "${YELLOW}FVM found, using flutter local (${CYAN}version: $version${END}${YELLOW})${END}"
         else 
             echo "${YELLOW}FVM not found, using flutter global${END}"
         fi
+        echo -e "\U1F9F9 ${GREEN}Running flutter pub get in ${PWD##*/}${END}"
         fvm flutter pub get
     fi
 }
@@ -138,18 +142,19 @@ function getIp() {
     fi
 }
 
-function countfiles(){
+function countfiles() {
   find $1 -type f | wc -l
 }
 
 
-function website-status(){
+function website-status() {
   curl -s --head --request GET $1 | grep "200 OK"
 }
 
 function copy () {
   pbcopy < $1
 }
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
     source $HOME/dotfiles/macos/update-all.zsh
 fi
