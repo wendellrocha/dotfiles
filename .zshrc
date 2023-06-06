@@ -35,6 +35,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 source "$HOME/dotfiles/aliases.sh"
+source "$HOME/dotfiles/completitions.sh"
 export TERM="screen-256color"
 
 if [[ $(id -u) -ne 0 ]] ; then
