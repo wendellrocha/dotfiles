@@ -2,11 +2,18 @@
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     VSCODE=$(mdfind -literal 'kMDItemFSName=="Visual Studio Code - Insiders.app"')
+    CHROME_CANARY=$(mdfind -literal 'kMDItemFSName=="Google Chrome Canary.app"')
     alias cat="bat --color=always --style=numbers,changes,header"
     alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+    
     if [[ ! -z "$VSCODE" ]]; then
         alias code="code-insiders"
     fi
+
+    if [[ ! -z "$CHROME_CANARY" ]]; then
+        export CHROME_EXECUTABLE="/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary"
+    fi
+
     node=$(which node)
     export NODE_BINARY=$(which node)
 else
