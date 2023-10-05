@@ -35,9 +35,6 @@ function buildDirExists() {
     fi
 }
 
-
-
-
 function flca() {
     for d in ./*/ ; do (cd "$d" && buildDirExists); done
 }
@@ -182,6 +179,19 @@ function website-status() {
 function copy () {
   pbcopy < $1
 }
+
+function update-nvm() {
+  (
+    cd "$NVM_DIR"
+    git fetch --tags origin
+    git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+  ) && \. "$NVM_DIR/nvm.sh"
+}
+
+function update-zprezto() {
+  zprezto-update && (cd $HOME/.zprezto-contrib && git pull --recurse-submodules)
+}
+
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     source $HOME/dotfiles/macos/update-all.zsh

@@ -11,8 +11,8 @@ if [ ! -d "$HOME/.zprezto" ]; then
     done
 fi
 
-if [ ! -d "$HOME/.zprezto-prompt-contrib" ]; then
-    git clone --recurse-submodules https://github.com/mattmc3/prezto-prompt-contrib ${ZDOTDIR:-$HOME}/.zprezto-prompt-contrib
+if [ ! -d "$HOME/.zprezto-contrib" ]; then
+    git clone --recurse-submodules https://github.com/belak/prezto-contrib ${ZDOTDIR:-$HOME}/.zprezto-prompt-contrib
 fi
 
 if [ ! -x "$(command -v starship)" ]; then
@@ -48,10 +48,10 @@ EOF
 
 
 cat > ~/.zshrc << EOF
+source $(pwd)/zsh-defer/zsh-defer.plugin.zsh
 source $(pwd)/.zshrc
 # Fig pre block. Keep at the top of this file.
 [[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
-source /Users/wendellrocha/dotfiles/.zshrc
 export STARSHIP_CONFIG=$(pwd)/starship.toml
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"

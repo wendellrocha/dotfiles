@@ -1,4 +1,5 @@
 export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   export ZSH="/Users/$USER/.oh-my-zsh"
@@ -12,13 +13,16 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   export PATH="$PATH:/Users/$USER/.local/bin"
   export REACT_TERMINAL=iTerm
   export PATH="$PATH:/$JAVA_HOME/bin:$PATH"
+if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
+  export PATH=/opt/homebrew/opt/ruby/bin:$PATH
+  export PATH=`gem environment gemdir`/bin:$PATH
+fi
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   if [[ $(id -u) -ne 0 ]] ; then
     export ZSH="/home/$USER/.oh-my-zsh"
     export ANDROID_HOME="/home/$USER/Android/sdk"
     export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
     export PATH="$PATH:/home/$USER/Android/sdk/platform-tools"
-    export PATH="$PATH:/home/$USER/fvm/default/bin"
     export PATH="$PATH:/home/$USER/.pub-cache/bin"
     export PATH="$PATH:/$JAVA_HOME/bin:$PATH"
     export PATH="$PATH:/home/$USER/.local/bin"
@@ -47,8 +51,6 @@ if [[ $(id -u) -ne 0 ]] ; then
   fi
 fi
 
-[ -f ~/.iterm2_shell_integration.zsh ] && source ~/.iterm2_shell_integration.zsh
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND=find
 export FZF_DEFAULT_OPTS="
@@ -59,26 +61,3 @@ export FZF_DEFAULT_OPTS="
   --pointer='▶'
   --marker='│'
 "
-### Added by Zinit's installer
-if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
-        print -P "%F{33} %F{34}Installation successful.%f%b" || \
-        print -P "%F{160} The clone has failed.%f%b"
-fi
-
-source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-zinit light-mode for \
-    zdharma-continuum/zinit-annex-readurl \
-    zdharma-continuum/zinit-annex-bin-gem-node \
-    zdharma-continuum/zinit-annex-patch-dl \
-    zdharma-continuum/zinit-annex-rust
-
-### End of Zinit's installer chunk
-zinit light zdharma-continuum/fast-syntax-highlighting
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-completions

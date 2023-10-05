@@ -16,8 +16,7 @@
 zstyle ':prezto:*:*' color 'yes'
 
 # Add additional directories to load prezto modules from
-# zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
-zstyle ':prezto:load' pmodule-dirs ${ZDOTDIR:-$HOME}/.zprezto-prompt-contrib
+zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
 
 # Allow module overrides when pmodule-dirs causes module name collisions
 zstyle ':prezto:load' pmodule-allow-overrides 'yes'
@@ -32,9 +31,6 @@ zstyle ':prezto:load' pmodule-allow-overrides 'yes'
 # The order matters.
 zstyle ':prezto:load' pmodule \
   'environment' \
-  'terminal' \
-  'editor' \
-  'history' \
   'directory' \
   'spectrum' \
   'utility' \
@@ -43,8 +39,10 @@ zstyle ':prezto:load' pmodule \
   'prompt' \
   'autosuggestions' \
   'command-not-found' \
-  'git' \
-  'syntax-highlighting'
+  'syntax-highlighting' \
+  'node' \
+  'nvm-auto-use' \
+  'git' 
 
 #
 # Autosuggestions
@@ -135,7 +133,7 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'starship'
+zstyle ':prezto:module:prompt' theme 'steeef'
 
 # Set the working directory prompt display length.
 # By default, it is set to 'short'. Set it to 'long' (without '~' expansion)
@@ -209,7 +207,7 @@ zstyle ':prezto:module:prompt' theme 'starship'
 #
 
 # Auto set the tab and window titles.
-# zstyle ':prezto:module:terminal' auto-title 'yes'
+zstyle ':prezto:module:terminal' auto-title 'yes'
 
 # Set the window title format.
 # zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
