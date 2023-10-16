@@ -20,6 +20,7 @@ winget install JanDeDobbeleer.OhMyPosh -s winget
 Install-Module -Name Terminal-Icons -Repository PSGallery
 Install-Module -Name PSFzf
 Install-Module posh-git -Scope CurrentUser -Force
+Install-Module PSReadLine -RequiredVersion 2.1.0
 ```
 
 ### Install font
