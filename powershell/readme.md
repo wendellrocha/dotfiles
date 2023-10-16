@@ -14,11 +14,7 @@ irm get.scoop.sh | iex
 ### Install packages
 
 ```pwsh
-choco install fzf
-choco install jq
-choco install bat
-scoop install sudo
-scoop install firacode
+choco install fzf jq bat sudo
 winget install Git.Git
 winget install JanDeDobbeleer.OhMyPosh -s winget
 Install-Module -Name Terminal-Icons -Repository PSGallery
