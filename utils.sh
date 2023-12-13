@@ -21,15 +21,16 @@ function isFlutterProject() {
 
 function buildDirExists() {
     if [[ -d "build" || -d ".dart_tool" ]]; then
-        version=$(cat .fvm/fvm_config.json | grep flutterSdkVersion | cut -f2 -d":" | cut -f1 -d"," | tr -d '"')
-        echo -e "\U1F9F9 ${GREEN}Running flutter clean in ${PWD##*/}${END}"
-        if [[ ! -z $version ]]; then
-            echo "${YELLOW}FVM found, using flutter local (${CYAN}version: $version${END}${YELLOW})${END}"
+        version=$(jq .flutter .fvmrc | tr -d \")
+        if [[ ! -z "$version" ]]; then
+            echo -e "${YELLOW}FVM found, using flutter local (${CYAN}version: $version${END}${YELLOW})${END}.\n ${GREEN}Running flutter clean in ${CYAN}${PWD##*/}${END}${END}"
             fvm flutter clean
-        else 
-            echo "${YELLOW}FVM not found, using flutter global${END}"
-            flutter clean
+            return 0;
+        else
+            echo "${YELLOW}FVM not found, using flutter global${END}"    
         fi
+        echo -e "\U1F9F9 ${GREEN}Running flutter clean in ${PWD##*/}${END}"
+        flutter clean
     else
          echo "${CYAN}Nothing to do, skipping$2${END}"
     fi
@@ -53,63 +54,42 @@ function flc() {
 
 function fld() {
     if isFlutterProject; then
-        version=$(cat .fvm/fvm_config.json | grep flutterSdkVersion | cut -f2 -d":" | cut -f1 -d"," | tr -d '"')
-        echo -e "\U1F637 ${GREEN}Running flutter doctor in ${PWD##*/}${END}"
-        if [[ ! -z $version ]]; then
-            echo "${YELLOW}FVM found, using flutter local (${CYAN}version: $version${END}${YELLOW})${END}"
+        if [[ ! -z "$version" ]]; then
+            echo "${YELLOW}FVM found, using flutter local (${CYAN}version: $version${END}${YELLOW})${END}.\n ${GREEN}Running flutter doctor in ${CYAN}${PWD##*/}${END}${END}"
             fvm flutter doctor
-        else 
-            echo "${CYAN}FVM not found, using flutter global${END}"
-            flutter doctor
+            return 0;
+        else
+            echo "${YELLOW}FVM not found, using flutter global${END}"
         fi
+        echo -e "\U1F637 ${GREEN}Running flutter doctor in ${PWD##*/}${END}"
+        flutter doctor
     fi
 }
 
 function flget() {
     if isFlutterProject; then
-        version=$(cat .fvm/fvm_config.json | grep flutterSdkVersion | cut -f2 -d":" | cut -f1 -d"," | tr -d '"')
-        echo -e "\U1F9F9 ${GREEN}Running flutter pub get in ${PWD##*/}${END}"
-        if [[ ! -z $version ]]; then
-            echo "${YELLOW}FVM found, using flutter local (${CYAN}version: $version${END}${YELLOW})${END}"
+        version=$(jq .flutter .fvmrc | tr -d \")
+        if [[ ! -z "$version" ]]; then
+            echo "${YELLOW}FVM found, using flutter local (${CYAN}version: $version${END}${YELLOW})${END}. \n${GREEN}Running flutter pub get in ${CYAN}${PWD##*/}${END}${END}"
             fvm flutter pub get
-        else 
-            echo "${CYAN}FVM not found, using flutter global${END}"
-            flutter pub get
+            return 0;
+        else
+            echo "${YELLOW}FVM not found, using flutter global${END}"
         fi
+        echo -e "\U1F9F9 ${GREEN}Running flutter pub get in ${PWD##*/}${END}"
+        flutter pub get
     fi
 }
 
 # **************************************** Flutter Utils Functions -- END ****************************************
 
 
-# **************************************** Bankeiro Utils Functions -- INIT ****************************************
-
-function bankeiro-run-android() {
-    DIR_NAME=${PWD##*/}
-    if [[ "$DIR_NAME" == "bankeiro_app" ]]; then
-        (cd packages/mobile/android && ./gradlew clean) && (cd packages/mobile && yarn android --active-arch-only && yarn start --reset-cache)
-    else
-        echo "${RED}Error: Nothing to do, exiting...${END}"
-    fi
-}
-
-function bankeiro-run-ios() {
-    DIR_NAME=${PWD##*/}
-    if [[ "$DIR_NAME" == "bankeiro_app" ]]; then
-        yarn native:ios --simulator="iPhone 14 Pro Max"
-    else
-        echo "${RED}Error: Nothing to do, exiting...${END}"
-        exit
-    fi
-}
-# **************************************** Bankeiro Utils Functions -- END ****************************************
-
 function rcd() {
     if [[ -z "$1" ]]; then
         echo "${RED}Error: No argument supplied. Usage: rcd <command> ${END}"
         return 1
     else
-        for d in ./*/ ; do (cd "$d" && $1); done
+        for d in ./*/ ; do (cd "$d" && "$@"); done
     fi
 }
 
