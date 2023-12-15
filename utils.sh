@@ -18,11 +18,21 @@ function isFlutterProject() {
     fi
 }
 
+function isVscodeTerminal() {
+    if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+
 
 function buildDirExists() {
     if [[ -d "build" || -d ".dart_tool" ]]; then
         version=$(jq .flutter .fvmrc | tr -d \")
-        if [[ ! -z "$version" ]]; then
+        isVscodeTerminal
+        if [ ! -z "$version" ] && [ $? -eq 1 ]; then
             echo -e "${YELLOW}FVM found, using flutter local (${CYAN}version: $version${END}${YELLOW})${END}.\n ${GREEN}Running flutter clean in ${CYAN}${PWD##*/}${END}${END}"
             fvm flutter clean
             return 0;
@@ -54,7 +64,9 @@ function flc() {
 
 function fld() {
     if isFlutterProject; then
-        if [[ ! -z "$version" ]]; then
+        version=$(jq .flutter .fvmrc | tr -d \")
+        isVscodeTerminal
+        if [ ! -z "$version" ] && [ $? -eq 1 ]; then
             echo "${YELLOW}FVM found, using flutter local (${CYAN}version: $version${END}${YELLOW})${END}.\n ${GREEN}Running flutter doctor in ${CYAN}${PWD##*/}${END}${END}"
             fvm flutter doctor
             return 0;
@@ -69,7 +81,8 @@ function fld() {
 function flget() {
     if isFlutterProject; then
         version=$(jq .flutter .fvmrc | tr -d \")
-        if [[ ! -z "$version" ]]; then
+        isVscodeTerminal
+        if [ ! -z "$version" ] && [ $? -eq 1 ]; then
             echo "${YELLOW}FVM found, using flutter local (${CYAN}version: $version${END}${YELLOW})${END}. \n${GREEN}Running flutter pub get in ${CYAN}${PWD##*/}${END}${END}"
             fvm flutter pub get
             return 0;
