@@ -185,6 +185,10 @@ function update-zprezto() {
   zprezto-update && (cd $HOME/.zprezto-contrib && git pull --recurse-submodules)
 }
 
+function connect-device() {
+  default=$(adb shell settings get system screen_off_timeout)
+  adb shell settings put system screen_off_timeout 43200000 ; scrcpy -Sw ; adb shell settings put system screen_off_timeout $default;
+}
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     source $HOME/dotfiles/macos/update-all.zsh
