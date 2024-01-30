@@ -190,6 +190,10 @@ function connect-device() {
   adb shell settings put system screen_off_timeout 43200000 ; scrcpy -Sw ; adb shell settings put system screen_off_timeout $default;
 }
 
+function device-print() {
+    adb exec-out screencap -p > "$(date +"%Y_%m_%d_%I_%M_%p").png"
+}
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
     source $HOME/dotfiles/macos/update-all.zsh
 fi
