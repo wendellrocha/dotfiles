@@ -7,8 +7,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   export ANDROID_HOME="$HOME/Library/Android/sdk"
   export PATH="$PATH:$ANDROID_HOME/emulator"
   export PATH="$PATH:$ANDROID_HOME/platform-tools"
-  export PATH="$PATH:/Users/$USER/development/flutter/bin"
-  export PATH="$PATH:/Users/$USER/development/bin"
+  export PATH="$PATH:/Users/$USER/fvm/default/bin"
   export PATH="$PATH:/Users/$USER/.pub-cache/bin"
   export PATH="$PATH:/Users/$USER/.local/bin"
   export REACT_TERMINAL=iTerm
@@ -26,7 +25,6 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     export PATH="$PATH:/home/$USER/.pub-cache/bin"
     export PATH="$PATH:/$JAVA_HOME/bin:$PATH"
     export PATH="$PATH:/home/$USER/.local/bin"
-    export PATH="$PATH:/opt/mitm"
   else
     export ZSH="/root/.oh-my-zsh"
     export ANDROID_HOME="/home/wendell/Android/sdk"

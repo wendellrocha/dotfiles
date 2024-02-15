@@ -191,8 +191,7 @@ function connect-device() {
 }
 
 function device-print() {
-    fileName=$(date +"%Y_%m_%d_%I_%M_%p").png
-    adb exec-out screencap -p > "$fileName" | mv $fileName ~/Pictures
+    adb exec-out screencap -p > "$(date +"%Y_%m_%d_%I_%M_%p").png"
 }
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
