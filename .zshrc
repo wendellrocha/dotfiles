@@ -38,6 +38,11 @@ fi
 
 source "$HOME/dotfiles/aliases.sh"
 source "$HOME/dotfiles/completitions.sh"
+if [[ -s "$HOME/dotfiles/.env" ]]; then
+  source "$HOME/dotfiles/.env"
+else
+  echo -e "${RED}Error: No .env file found.${END}"
+fi
 export TERM="screen-256color"
 
 if [[ $(id -u) -ne 0 ]] ; then
