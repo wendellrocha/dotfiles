@@ -1,5 +1,6 @@
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+export REACT_TERMINAL=iTerm
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   export ZSH="/Users/$USER/.oh-my-zsh"
