@@ -166,7 +166,7 @@ function countfiles() {
 
 
 function website-status() {
-  curl -s --head --request GET $1 | grep "200 OK"
+  curl -s --head --request GET $1 | grep --color=auto HTTP
 }
 
 function copy () {
