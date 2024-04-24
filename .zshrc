@@ -1,6 +1,5 @@
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-export REACT_TERMINAL=Warp
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   export ZSH="/Users/$USER/.oh-my-zsh"
@@ -11,7 +10,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   export PATH="$PATH:/Users/$USER/fvm/default/bin"
   export PATH="$PATH:/Users/$USER/.pub-cache/bin"
   export PATH="$PATH:/Users/$USER/.local/bin"
-  export REACT_TERMINAL=Warp
+  export REACT_TERMINAL=iTerm
   export PATH="$PATH:/$JAVA_HOME/bin:$PATH"
 if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
   export PATH=/opt/homebrew/opt/ruby/bin:$PATH

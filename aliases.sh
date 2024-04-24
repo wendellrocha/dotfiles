@@ -14,8 +14,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         export CHROME_EXECUTABLE="/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary"
     fi
 
-    node=$(which node)
-    export NODE_BINARY=$(which node)
+    export NODE_BINARY=$(command -v node)
 else
     alias cat="batcat --color=always --style=numbers,changes,header"
 fi

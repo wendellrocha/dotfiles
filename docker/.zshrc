@@ -12,7 +12,6 @@ export LC_ALL='en_US.UTF-8'
 export TERM="screen-256color"
 
 alias ls="exa -abghHlS --git"
-alias cat="batcat --color=always --style=numbers"
 
 export PATH="$PATH:/home/developer/Android/sdk/platform-tools"
 export PATH="$PATH:/usr/lib/dart/bin"
