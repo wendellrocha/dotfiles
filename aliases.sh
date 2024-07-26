@@ -20,7 +20,7 @@ else
 fi
 
 
-alias ls="exa -abghHlS --icons"
+alias ls="eza -abghHlS --icons"
 alias ports='netstat -a | grep -i "listen"'
 alias reload='source ~/.zshrc'
 alias backup='tar -zcvf $(date +%Y%m%d).tar.gz *'
