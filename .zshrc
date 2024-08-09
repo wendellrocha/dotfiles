@@ -1,3 +1,12 @@
+ZSH="$HOME/.oh-my-zsh"
+
+#Theme
+ZSH_THEME=""
+
+#Plugins
+plugins=()
+source $ZSH/oh-my-zsh.sh
+
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
@@ -32,10 +41,6 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   fi
 fi
 
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
 source "$HOME/dotfiles/aliases.sh"
 source "$HOME/dotfiles/completitions.sh"
 if [[ -s "$HOME/dotfiles/.env" ]]; then
@@ -64,3 +69,6 @@ export FZF_DEFAULT_OPTS="
   --pointer='▶'
   --marker='│'
 "
+
+#Star Ship
+eval "$(starship init zsh)"
