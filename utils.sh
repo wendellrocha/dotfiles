@@ -194,6 +194,23 @@ function device-print() {
     adb exec-out screencap -p > "$(date +"%Y_%m_%d_%I_%M_%p").png"
 }
 
+function iosChangeVersion() {
+
+# PROJECT_FILE="../ios/AllpHome.xcodeproj/project.pbxproj"
+
+if [[ -z "$1" || -z "$2" || -z "$3" ]]; then
+    echo -e "${RED}Error: No argument supplied. Usage: iosChangeVersion <version> <build> <project> ${RESET}"
+    return 1
+fi
+
+
+echo -e "${GREEN}Updating version to ${YELLOW}$1${GREEN} and build version to ${YELLOW}$2${RESET}"
+# Update the MARKETING_VERSION and CURRENT_PROJECT_VERSION values in the project file
+sed -i "" "s/MARKETING_VERSION = .*/MARKETING_VERSION = $1;/g" "$3"
+sed -i "" "s/CURRENT_PROJECT_VERSION = .*/CURRENT_PROJECT_VERSION = $2;/g" "$3"
+
+}
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
     source $HOME/dotfiles/macos/update-all.zsh
 fi

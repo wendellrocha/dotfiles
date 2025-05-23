@@ -1,12 +1,3 @@
-ZSH="$HOME/.oh-my-zsh"
-
-#Theme
-ZSH_THEME=""
-
-#Plugins
-plugins=()
-source $ZSH/oh-my-zsh.sh
-
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
@@ -21,9 +12,12 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   export PATH="$PATH:/Users/$USER/.local/bin"
   export REACT_TERMINAL=iTerm
   export PATH="$PATH:/$JAVA_HOME/bin:$PATH"
+  export PATH="$VOLTA_HOME/bin:$PATH"
+  export PATH="$PATH:/Users/$USER/bin"
 if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
   export PATH=/opt/homebrew/opt/ruby/bin:$PATH
   export PATH=`gem environment gemdir`/bin:$PATH
+  # export GEM_HOME="/Users/$USER/gems"
 fi
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   if [[ $(id -u) -ne 0 ]] ; then
@@ -41,13 +35,24 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   fi
 fi
 
+#Theme
+ZSH_THEME=""
+
+#Plugins
+plugins=(zsh-autosuggestions zsh-syntax-highlighting)
+DISABLE_AUTO_TITLE="true"
+
+
+source $ZSH/oh-my-zsh.sh
 source "$HOME/dotfiles/aliases.sh"
 source "$HOME/dotfiles/completitions.sh"
+
 if [[ -s "$HOME/dotfiles/.env" ]]; then
   source "$HOME/dotfiles/.env"
 else
   echo -e "${RED}Error: No .env file found.${END}"
 fi
+
 export TERM="screen-256color"
 
 if [[ $(id -u) -ne 0 ]] ; then
@@ -59,7 +64,7 @@ if [[ $(id -u) -ne 0 ]] ; then
   fi
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND=find
 export FZF_DEFAULT_OPTS="
   --color hl:011,fg+:015,bg+:-1,hl+:011

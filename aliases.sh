@@ -3,11 +3,17 @@
 if [[ "$OSTYPE" == "darwin"* ]]; then
     VSCODE=$(mdfind -literal 'kMDItemFSName=="Visual Studio Code - Insiders.app"')
     CHROME_CANARY=$(mdfind -literal 'kMDItemFSName=="Google Chrome Canary.app"')
+    XCODE15=$(mdfind -literal 'kMDItemFSName=="Xcode-15.4.0.app"')
     alias cat="bat --color=always --style=numbers,changes,header"
     alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
     
+    
     if [[ ! -z "$VSCODE" ]]; then
         alias code="code-insiders"
+    fi
+
+    if [[ ! -z "$XCODE15" ]]; then
+        alias xcode15="/Applications/Xcode-15.4.0.app/Contents/MacOS/Xcode"
     fi
 
     if [[ ! -z "$CHROME_CANARY" ]]; then
@@ -37,6 +43,7 @@ alias rename='function _rename() { for i in *$1*; do mv "$i" "${i/$1/$2}"; done 
 alias to='function _to() { (cd "$@" && tree;) }; _to'
 alias search='function _search() { grep -r --exclude-dir={.git,.svn,infrastructure,android,ios,shared,macos,web,windows,linux,.fvm,build,.dart_tool,.idea,.vscode,.vs,.fleet,.flutter-*,.metadata,*.iml} $1 *; }; _search'
 alias gdiscard='git clean -df && git checkout -- .'
+alias brewclean='brew cleanup -v -s --prune=all'
 
 kernel_string=$(uname -r)
 
