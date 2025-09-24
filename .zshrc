@@ -14,11 +14,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   export PATH="$PATH:/$JAVA_HOME/bin:$PATH"
   export PATH="$VOLTA_HOME/bin:$PATH"
   export PATH="$PATH:/Users/$USER/bin"
-if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
-  export PATH=/opt/homebrew/opt/ruby/bin:$PATH
-  export PATH=`gem environment gemdir`/bin:$PATH
-  # export GEM_HOME="/Users/$USER/gems"
-fi
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   if [[ $(id -u) -ne 0 ]] ; then
     export ZSH="/home/$USER/.oh-my-zsh"
@@ -33,6 +28,10 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     export ANDROID_HOME="/home/wendell/Android/sdk"
     export PATH="$PATH:/home/wendell/Android/sdk/platform-tools"
   fi
+fi
+
+if command -v ccache &> /dev/null; then
+  export USE_CCACHE=1
 fi
 
 #Theme
@@ -77,3 +76,7 @@ export FZF_DEFAULT_OPTS="
 
 #Star Ship
 eval "$(starship init zsh)"
+
+# Força a remoção de variáveis de ambiente do Gem para garantir o uso do asdf
+unset GEM_HOME
+unset GEM_PATH
