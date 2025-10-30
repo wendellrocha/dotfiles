@@ -44,6 +44,8 @@ alias to='function _to() { (cd "$@" && tree;) }; _to'
 alias search='function _search() { grep -r --exclude-dir={.git,.svn,infrastructure,android,ios,shared,macos,web,windows,linux,.fvm,build,.dart_tool,.idea,.vscode,.vs,.fleet,.flutter-*,.metadata,*.iml} $1 *; }; _search'
 alias gdiscard='git clean -df && git checkout -- .'
 alias brewclean='brew cleanup -v -s --prune=all'
+alias rn-run-debug='yarn android:development --device=$ANDROID_SERIAL'
+alias rn-run-prod='yarn android:production --device=$ANDROID_SERIAL'
 
 kernel_string=$(uname -r)
 
